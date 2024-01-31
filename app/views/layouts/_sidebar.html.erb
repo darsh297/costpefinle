@@ -1,0 +1,23 @@
+<div class="sidebar">
+ <div>
+    <img src="https://i.imgur.com/9Q4oeZ3.png" alt="Logo" style="max-width: 80%; max-height: 80%;">
+
+      <br/>
+     <%= link_to home_index_path do %>
+        <%= image_tag("login/dashboard.png", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
+        Dashboard
+      <% end %>
+       <br/>
+    <%= link_to users_path do %>
+          <%= image_tag("login/management.png", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
+          Manage User
+        <% end %>
+ </div>
+ <div style="margin-top: auto; margin-bottom: 10px;">
+      <%= link_to destroy_user_session_path, method: :delete, data: { turbo_method: :delete } do %>
+        <%= image_tag("login/power-off.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
+        Logout
+      <% end %>
+       
+
+</div>

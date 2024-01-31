@@ -1,0 +1,126 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ @import 'fade_out_flash_messages';
+
+ 
+ .content {
+    flex: 1;
+    padding: 20px;
+    margin-left: 20%; /* Adjusted for the width of the sidebar */
+    overflow-y: auto;
+    box-sizing: border-box;
+  }
+
+  .content h1 {
+    margin-top: 50;
+  }
+
+  .profile-details {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    background-color: #fff;
+  }
+
+  .sidebar a {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+  }
+
+  .sidebar a:hover {
+    opacity: 0.8;
+  }
+  body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .container {
+    display: flex;
+    height: 100vh;
+  }
+
+  .left-side {
+    width: 40%;
+    height: 100%;
+    background-color: #0F1035;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo {
+    max-width: 80%;
+    max-height: 80%;
+  }
+
+  .right-side {
+    width: 60%;
+    display: flex;
+    background-color: #F9FFFF;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+  }
+
+    .login-logo {
+      max-width: 20%;
+      max-height: 20%;
+    }
+
+    .login-container {
+      text-align: center;
+    }
+
+  .field {
+    text-align: left;
+  }
+
+  .actions {
+    text-align: center;
+  }
+  
+  .sidebar a, .sidebar a:hover {
+    color: white;
+    text-decoration: none;
+    margin-bottom: 10px;
+    display: flex; /* Align items in a flex container */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .sidebar a:hover {
+    opacity: 0.8;
+  }
+  
+  .sidebar a img {
+    vertical-align: middle;
+    margin-right: 5px;
+    height: 20px;
+    width: 20px;
+  }
+  
+  .sidebar a:hover img {
+    /* Add hover effect styles for the image */
+    filter: brightness(70%);
+  }
+  
+  /* Ensure the text is left-aligned */
+  .sidebar a span {
+    margin-left: 5px; /* Adjust as needed */
+  }
+  

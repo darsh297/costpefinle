@@ -1,0 +1,27 @@
+/* app/assets/stylesheets/custom_styles.css */
+
+
+  .notice {
+    color: #155724;
+   
+ 
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: 300px; /* Set a width as needed */
+    z-index: 9999; 
+  }
+  
+  .alert {
+    color: #ff0f0f;
+    
+  
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    
+  }
+  
