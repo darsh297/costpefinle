@@ -7,6 +7,6 @@ class AddFieldsToUsers < ActiveRecord::Migration[7.1]
     add_column :users, :ifsc, :string
     add_column :users, :mobileNumber, :string
     add_column :users, :joiningDate, :date
-    add_column :users, :isactive, :boolean
+    add_column :users, :isactive, :boolean, default: true
   end
 end

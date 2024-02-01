@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users,skip: [:registrations]
+  resources :profile
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -9,14 +10,18 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
   resources :home
+  resources :workreports
 
   resources :users do
     member do
       delete :soft_delete
     end
   end
-  get '/add_user', to: 'users#add_user'
+  get '/workreports/new', to: 'workreports#new'
+  post '/create', to: 'workreports#create'
+  get '/users/new', to: 'users#add_user'
   post '/create', to: 'users#create'
+
 
   resources :users, only: [:index, :new, :create ,:edit]
 

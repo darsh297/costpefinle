@@ -1,0 +1,2 @@
+class Workreport < ApplicationRecord
+end

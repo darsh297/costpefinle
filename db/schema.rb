@@ -62,7 +62,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_121612) do
     t.string "ifsc"
     t.string "mobileNumber"
     t.date "joiningDate"
-    t.boolean "isactive"
+    t.boolean "isactive", default: true
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["department_id"], name: "index_users_on_department_id"
     t.index ["designation_id"], name: "index_users_on_designation_id"

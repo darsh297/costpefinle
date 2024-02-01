@@ -124,3 +124,29 @@
     margin-left: 5px; /* Adjust as needed */
   }
   
+.btn-delete {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip-text {
+  visibility: hidden;
+  width: 60px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -30px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.btn-delete:hover .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}

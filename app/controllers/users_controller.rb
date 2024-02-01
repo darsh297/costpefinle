@@ -1,6 +1,10 @@
 class UsersController < ApplicationController
       def index
-        @user = User.all
+        if current_user.role_id == 2
+          @users = User.where(company_id: current_user.company_id, isactive: true, role_id: [2, 3, 4, 5,6])
+        else
+          @users = User.where(isactive: true)
+        end
       end
 
       def new
@@ -17,7 +21,7 @@ class UsersController < ApplicationController
           redirect_to users_path
         else
           flash[:notice] = "User can not be created."
-          redirect_to users_path
+          render new 
         end
       end
 
