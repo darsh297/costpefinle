@@ -1,18 +1,32 @@
 class User < ApplicationRecord
-  validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+  belongs_to :role
+  belongs_to :company ,optional:true
+  belongs_to :designation , optional: true
+  belongs_to :department,   optional: true
 
-belongs_to :role
-belongs_to :company
-belongs_to :designation
-belongs_to :department
+
+  validate :unique_super_admin_user, if: :super_admin?
+
+  validates :designation, presence: true, unless: -> { role_id == 2 }
+  validates :department, presence: true, unless: -> { role_id == 2 }
+
+  def soft_delete
+    update_attribute(:isactive, false)
+  end
+
+  private
+
+  def super_admin?
+    role_id == 1
+  end
 
 
-         def soft_delete
-          update_attribute(:isactive, false)
-        end
+  def unique_super_admin_user
+    if User.exists?(role_id: 1)
+      errors.add(:role_id, "Only one user is allowed with role_id == 1")
+    end
+  end
 end

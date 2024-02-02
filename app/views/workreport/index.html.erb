@@ -1,0 +1,11 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 80px; display: flex; align-items: center;">
+    <h1 style="flex-grow: 1;">Work Report</h1>
+
+    <%= link_to new_workreport_path, class: "float-end" do %>
+      <%= image_tag("action/note.png", alt: "New Work Report", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/sidebar' %>

@@ -10,7 +10,7 @@ class Ability
       can :manage, :all
     elsif user.role_id == 2
       can :manage, :all
-      can :create, User, role_id: [1, 2]
+      cannot :create, User, role_id: [1, 2]
     elsif user.role_id == 3
       can :manage, :all
       cannot :create, User, role_id: [1, 2,3]

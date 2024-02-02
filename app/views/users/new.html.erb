@@ -1,7 +1,7 @@
-<%= stylesheet_link_tag 'user_form', media: 'all', 'data-turbolinks-track': 'reload' %> 
+<%= stylesheet_link_tag 'user_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="content">
-  <div style="text-align: left; margin-top: 100px;">
+  <div style="text-align: left; margin-top: 80px;">
     <%= form_for(:user, url: create_path, data: { turbo: false }) do |f| %>
       <div class="field">
         <h1 style="color: #365486;">Add User</h1>
@@ -23,11 +23,13 @@
         <div class="form-group">
           <div class="half-width">
             <%= f.label :role_id, class: "form-label" %><br />
-            <%= f.collection_select :role_id, Role.all, :id, :role_name, { prompt: "Select a role" }, { class: "form-control", required: true } %><br />
-            <%= display_errors(f, :role_id) %>
+            <% if current_user.role_id == 1 %>
+              <%= f.collection_select :role_id, Role.all, :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true %>
+            <% else %>
+<%= f.collection_select :role_id, Role.where.not(id: [1, 2]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true, id: "role-select" %>            <% end %>
           </div>
-          <div class="half-width">
-            <%= f.label :company_id, class: "form-label" %><br />
+          <div class="half-width" class>
+             <%= f.label :company_id, class: "form-label" %><br />
             <% if current_user.role_id == 2 %>
               <%= f.hidden_field :company_id, value: current_user.company_id %>
               <%= current_user.company.company_name %>
@@ -39,16 +41,16 @@
         </div>
       </div>
 
-      <div class="field">
+      <div class="field" id="designation-department-fields">
         <div class="form-group">
           <div class="half-width">
             <%= f.label :department_id, class: "form-label" %><br />
-            <%= f.collection_select :department_id, Department.all, :id, :department_name, { prompt: "Select a department" }, { class: "form-control", required: true } %><br />
+            <%= f.collection_select :department_id, Department.all, :id, :department_name, { prompt: "Select a department" }, { class: "form-control" } %><br />
             <%= display_errors(f, :department_id) %>
           </div>
           <div class="half-width">
             <%= f.label :designation_id, class: "form-label" %><br />
-            <%= f.collection_select :designation_id, Designation.all, :id, :name, { prompt: "Select a department" }, { class: "form-control", required: true } %><br />
+            <%= f.collection_select :designation_id, Designation.all, :id, :name, { prompt: "Select a department" }, { class: "form-control" } %><br />
             <%= display_errors(f, :designation_id) %>
           </div>
         </div>
@@ -61,4 +63,33 @@
     <% end %>
   </div>
 </div>
+
 <%= render 'layouts/sidebar' %>
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  var roleSelect = document.getElementById("role-select");
+  var designationDepartmentFields = document.getElementById("designation-department-fields");
+
+  // Initial state
+  toggleFields();
+
+  // Add event listener to role select
+  roleSelect.addEventListener("change", function() {
+    toggleFields();
+  });
+
+  // Function to toggle visibility of fields based on selected role
+  function toggleFields() {
+    var selectedRoleId = roleSelect.value;
+
+    // Check if the selected role is company admin (role_id == 2)
+    if (selectedRoleId == 2) {
+      designationDepartmentFields.style.display = "none"; // Hide the designation and department fields
+    } else {
+      designationDepartmentFields.style.display = "block"; // Show the designation and department fields
+    }
+  }
+});
+</script>
+

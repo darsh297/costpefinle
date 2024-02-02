@@ -16,12 +16,20 @@ class UsersController < ApplicationController
 
       def create
         @user = User.new(user_params)
+
+        # If the role is 2, set designation_id and department_id to nil
+        if @user.role_id == 2
+          @user.designation_id = nil
+          @user.department_id = nil
+        end
+
         if @user.save
-          flash[:notice] = "#{@user.email}! created successfully."
+          flash[:notice] = "#{@user.email} created successfully."
           redirect_to users_path
         else
-          flash[:notice] = "User can not be created."
-          render new 
+          flash[:notice] = "User cannot be created."
+          puts @user.errors.full_messages  # Add this line to print validation errors to console
+          render :new
         end
       end
 

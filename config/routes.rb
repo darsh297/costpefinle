@@ -10,15 +10,14 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "home#index"
   resources :home
-  resources :workreports
+  resources :workreport
 
   resources :users do
     member do
       delete :soft_delete
     end
   end
-  get '/workreports/new', to: 'workreports#new'
-  post '/create', to: 'workreports#create'
+
   get '/users/new', to: 'users#add_user'
   post '/create', to: 'users#create'
 
