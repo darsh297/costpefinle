@@ -1,0 +1,26 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
+    <h1 style="flex-grow: 1;">Clients</h1>
+  </div>
+
+  <% if @client.any? %>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>No</th>
+          <th>Client</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @client.each_with_index do |client, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= client.client_name %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<%= render 'layouts/sidebar' %>

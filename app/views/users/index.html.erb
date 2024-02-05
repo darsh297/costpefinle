@@ -2,8 +2,22 @@
   <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
     <h1 style="flex-grow: 1;">All Users</h1>
 
-    <%= link_to users_new_path, class: "float-end" do %>
+    <%= link_to new_user_path, class: "float-end" do %>
       <%= image_tag("action/add.png", alt: "New user", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
+    <% end %>
+
+    <div>
+      <%= link_to clients_path, class: "float-end" do %>
+        Client
+      <% end %>
+    </div>
+
+    <%= link_to projects_path, class: "float-end" do %>
+      Project
+    <% end %>
+
+    <%= link_to email_hierarchys_path, class: "float-end" do %>
+      Email Hierarchy
     <% end %>
   </div>
 
@@ -27,8 +41,13 @@
             <td><%= user.role&.role_name %></td>
             <td>
               <%= link_to soft_delete_user_path(user), method: :delete, data: { turbo_method: :delete }, class: 'btn-delete' do %>
-                <%= image_tag('action/delete.png', height: 30) %>
+                <%= image_tag('action/delete.png', height: 30) %> 
                 <span class="tooltip-text">Delete</span>
+              <% end %>
+              <%= link_to user,class: 'btn-delete' do %>
+                <%= image_tag('action/eye.png', height: 30) %> 
+                <span class="tooltip-text">Show</span>
+               
               <% end %>
             </td>
           </tr>

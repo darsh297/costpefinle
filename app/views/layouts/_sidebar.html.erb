@@ -1,15 +1,16 @@
 <div class="sidebar">
+<div class="sidebar cinematic-text">
  <div>
     <%= image_tag("Bluebglogo.png", alt: "Logo", class: "logo", style: "max-width: 80%; max-height: 80%;") %>
 
 
       <br/>
-     <%= link_to home_index_path do %>
+     <%= link_to homes_path do %>
         <%= image_tag("login/dashboard.png", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
         Dashboard
       <% end %>
        <br/>
-        <%= link_to workreport_index_path do %>
+        <%= link_to  workreports_path do %>
         <%= image_tag("login/report.png", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
         Workreport
       <% end %>
@@ -17,11 +18,11 @@
   <% if can? :create, User %>
         <%= link_to users_path do %>
           <%= image_tag("login/management.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
-          Manage User
+          Manage 
         <% end %>
         <br/> 
       <% end %>
-       <%= link_to  profile_index_path do %>
+       <%= link_to    profiles_path do %>
         <%= image_tag("login/user.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
         Profile
       <% end %>

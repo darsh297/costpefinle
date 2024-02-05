@@ -1,0 +1,27 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 80px;">
+    <%= form_for(@email_hierarchy, url: email_hierarchys_path, data: { turbo: false }) do |f| %>
+      <div class="field"> 
+        <h1 style="color: #365486;">New Hierarchy</h1> <br /> <br />
+        <%= f.label :user_id, class: "form-label" %> <br />
+ 
+        <%= f.collection_select :user_id, User.all, :id, :email, { prompt: "Select a User" }, class: "form_control", required: true %><br /><br />
+     
+       <%= f.label :to, "To", class: "form-label" %> <br />
+       <%= f.collection_select :user_id, User.all, :id, :email, { prompt: "Select a User" }, class: "form_control", required: true %><br /> <br />
+
+        <%= f.label :Cc, "Cc", class: "form-label" %> <br />
+       <%= f.collection_select :user_id, User.all, :id, :email, { prompt: "Select a User" }, class: "form_control", required: true %> <br />
+
+      </div>
+     <br />
+
+      <div class="field">
+        <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/sidebar' %>
+

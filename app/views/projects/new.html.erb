@@ -1,0 +1,22 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 80px;">
+    <%= form_for(@project, url: projects_path, data: { turbo: false }) do |f| %>
+      <div class="field"> 
+        <h1 style="color: #365486;">Add Project</h1>
+        <%= f.label :client_id, class: "form-label" %><br />
+        <%= f.collection_select :client_id, Client.all, :id, :client_name, { prompt: "Select a Client" }, class: "form_control", required: true %>
+      </div>
+
+      <div>
+        <%= f.label :name, class: "form-label" %><br />
+        <%= f.text_field :name, class: "form-control", required: true %>
+      </div>
+
+      <div class="field">
+        <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<%= render 'layouts/sidebar' %>

@@ -1,0 +1,46 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
+    <h1 style="flex-grow: 1;">Projects</h1>
+
+      <%= link_to  new_project_path, class: "float-end" do %>
+      <%= image_tag("action/project.png", alt: "New user", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
+    <% end %>   
+  </div>
+
+  <% if @projects.any? %>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>No</th>
+          <th>Project</th>
+          <th>Client</th>
+          <th>Created By </th>
+          <th>Action</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each_with_index do |project, index| %>
+          <tr>
+            <td><%= index + 1 %></td>
+            <td><%= project.name%>
+            <td><%= project.client&.client_name %></td>
+            <td><%= project.user_id %></td>
+             <td>
+              <%= link_to soft_delete_project_path(project), method: :delete, data: { turbo_method: :delete }, class: 'btn-delete' do %>
+                <%= image_tag('action/status.png', height: 40) %>
+               
+              <% end %>
+            </td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% end %>
+</div>
+
+<%= render 'layouts/sidebar' %>
+
+
+

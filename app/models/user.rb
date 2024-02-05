@@ -3,9 +3,12 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :role
+  has_many :projects
   belongs_to :company ,optional:true
   belongs_to :designation , optional: true
   belongs_to :department,   optional: true
+  has_one :email_hierarchy
+
 
 
   validate :unique_super_admin_user, if: :super_admin?
@@ -15,6 +18,10 @@ class User < ApplicationRecord
 
   def soft_delete
     update_attribute(:isactive, false)
+  end
+
+  before_save do |user|
+    user.email = email.downcase
   end
 
   private

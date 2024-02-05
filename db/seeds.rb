@@ -28,9 +28,20 @@ end
   designations.each do |designation_name|
     Designation.find_or_create_by!(name: designation_name)
   end
+
+  clients = ['Righton', 'Belc' , 'Sony Music']
+  clients.each do |client_name|
+    Client.find_or_create_by!(client_name: client_name)
+  end
+
   user = User.find_or_create_by(email: 'root@gmail.com') do |u|
     u.password = '123456'
     u.role_id = Role.find_by(role_name: 'Root').id
+  end
+
+  project = Project.find_or_create_by(name: 'costpe') do |u|
+    u.client_id = Client.find_by(client_name: 'Righton').id
+    u.user_id = User.find_by(email: 'root@gmail.com').id
   end
 
 

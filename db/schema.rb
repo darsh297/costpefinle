@@ -10,9 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_02_055352) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_05_103157) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "clients", force: :cascade do |t|
+    t.string "client_name"
+    t.boolean "is_active", default: true
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "companies", force: :cascade do |t|
     t.string "company_name"
@@ -32,6 +39,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_055352) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "email_hierarchies", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "to_user_id"
+    t.bigint "cc_user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cc_user_id"], name: "index_email_hierarchies_on_cc_user_id"
+    t.index ["to_user_id"], name: "index_email_hierarchies_on_to_user_id"
+    t.index ["user_id"], name: "index_email_hierarchies_on_user_id"
+  end
+
   create_table "homes", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -42,6 +60,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_055352) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.bigint "client_id", null: false
+    t.boolean "is_active", default: true
+    t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
@@ -92,6 +113,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_02_055352) do
     t.index ["user_id"], name: "index_workreports_on_user_id"
   end
 
+  add_foreign_key "email_hierarchies", "users"
+  add_foreign_key "email_hierarchies", "users", column: "cc_user_id"
+  add_foreign_key "email_hierarchies", "users", column: "to_user_id"
+  add_foreign_key "projects", "clients"
   add_foreign_key "projects", "users"
   add_foreign_key "users", "companies"
   add_foreign_key "users", "departments"

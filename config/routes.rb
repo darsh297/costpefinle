@@ -1,18 +1,21 @@
 Rails.application.routes.draw do
-  devise_for :users,skip: [:registrations]
-  resources :profile
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  devise_for :users, skip: [:registrations]
+  resources :profiles
+  root "homes#index"
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
-
-  # Defines the root path route ("/")
-  root "home#index"
-  resources :home
-  resources :workreport
+  resources :homes
+  resources :workreports
+  resources :clients
+  resources :projects
+  resources :email_hierarchys
 
   resources :users do
+    member do
+      delete :soft_delete
+    end
+  end
+
+  resources :projects do
     member do
       delete :soft_delete
     end
@@ -21,7 +24,8 @@ Rails.application.routes.draw do
   get '/users/new', to: 'users#add_user'
   post '/create', to: 'users#create'
 
+  # Remove the extra line below
+  # post '/create', to: 'projects#create'
 
-  resources :users, only: [:index, :new, :create ,:edit]
-
+    resources :users, only: [:index, :new, :create, :edit , :show]
 end
