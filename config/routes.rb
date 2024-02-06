@@ -21,11 +21,12 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/users/new', to: 'users#add_user'
+  resources :workreports do
+    collection do
+      get 'others'
+    end
+  end
+
   post '/create', to: 'users#create'
-
-  # Remove the extra line below
-  # post '/create', to: 'projects#create'
-
-    resources :users, only: [:index, :new, :create, :edit , :show]
+  resources :users, only: [:index, :new, :create, :edit , :show]
 end

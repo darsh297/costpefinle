@@ -2,9 +2,14 @@
   <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
     <h1 style="flex-grow: 1;">Email Hierarchy</h1>
 
-    <%= link_to new_email_hierarchy_path, class: "float-end" do %>
-        New Hierarchy
-    <% end %> 
+    <div class="icon-link">
+      <%= link_to new_email_hierarchy_path, class: "float-end" do %>
+        <%= image_tag("action/addemail.png", alt: "New Email Hierrarchy", class: "btn-icon", style: "height: 30px; width: 28px;") %> 
+        <p class="icon-text">New Email Hierrarchy</p>
+      <% end %>
+    </div>
+
+    
 </div>
 </div>
 

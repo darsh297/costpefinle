@@ -1,7 +1,7 @@
 class CreateWorkreports < ActiveRecord::Migration[7.1]
   def change
     create_table :workreports do |t|
-      t.date :current_date
+      t.date :date
       t.text :tasks
       t.integer :hours
       t.string :status

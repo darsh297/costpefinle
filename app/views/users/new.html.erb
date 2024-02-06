@@ -1,7 +1,7 @@
 <%= stylesheet_link_tag 'user_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="content">
-  <div style="text-align: left; margin-top: 80px;">
+  <div style="text-align: left; margin-top: 60px;">
     <%= form_for(:user, url: create_path, data: { turbo: false }) do |f| %>
       <div class="field">
         <h1 style="color: #365486;">Add User</h1>
@@ -24,9 +24,9 @@
           <div class="half-width">
             <%= f.label :role_id, class: "form-label" %><br />
             <% if current_user.role_id == 1 %>
-              <%= f.collection_select :role_id, Role.all, :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true %>
+              <%= f.collection_select :role_id,Role.where.not(id: [1]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true %>
             <% else %>
-<%= f.collection_select :role_id, Role.where.not(id: [1, 2]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true, id: "role-select" %>            <% end %>
+            <%= f.collection_select :role_id, Role.where.not(id: [1, 2]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true, id: "role-select" %>            <% end %>
           </div>
           <div class="half-width" class>
              <%= f.label :company_id, class: "form-label" %><br />

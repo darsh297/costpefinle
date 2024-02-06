@@ -151,5 +151,65 @@
   opacity: 1;
 }
 .cinematic-text {
-  letter-spacing: 1px; 
+  letter-spacing: 2px; 
+}
+
+/* Add this CSS to your stylesheet or in a style tag within your HTML file */
+
+.icon-link a,
+.icon-link a:hover {
+  text-decoration: none; /* Removes the underline from the links within .icon-link */
+  text-align: center;
+}
+
+.icon-text {
+  /* Adjust the margin as needed */
+  font-size: 12px; /* Adjust the font size as needed */
+  color: #555; /* Adjust the color as needed */
+}
+
+.report-form {
+  width: 80%; /* Adjust the width as needed */
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.report-form h1 {
+  margin-top: 20px; /* Adjust the top margin as needed */
+}
+
+.form-label {
+  font-weight: bold;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-control {
+  width: 100%; /* Make the form controls full width */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.actions {
+  text-align: center;
+}
+
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #365486;
+  color: #fff;
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: #2c4368; /* Darken the background color on hover */
 }

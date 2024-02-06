@@ -1,1 +1,45 @@
-    <%= render 'layouts/sidebar' %>
+<div class="content">
+  <div style="text-align: left;">
+    <%= form_for(@workreport, html: { class: "report-form" }) do |f| %>
+      <div class="form-group">
+        <h1 style="color: #365486;">My Workreport</h1>
+      </div>
+      <div class="form-group">
+        <%= f.label :report_date, class: "form-label" %><br />
+        <% if Time.now.hour <= 12 %>
+          <%= f.select :date, options_for_select([Date.today], Date.today), {}, { class: "form-control", required: true } %>
+        <% else %>
+          <%= f.select :date, options_for_select([Date.today, Date.yesterday]), {}, { class: "form-control", required: true } %>
+        <% end %>
+      </div>
+      <div class="form-group">
+        <%= f.label :project, class: "form-label" %><br />
+        <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, {  }, class: "form-control", required: true %>        
+      </div>
+      <div class="form-group">
+        <%= f.label :tasks, class: "form-label" %><br />
+        <%= f.text_area :tasks, class: "form-control", required: true %>
+      </div>
+      <div class="form-group">
+        <div class="row">
+          <div class="col">
+            <%= f.label :hour, class: "form-label" %><br />
+            <%= f.select :hours, (0..23).to_a, { required: true }, class: "form-control" %>
+          </div>
+          <div class="col">
+            <%= f.label :minute, class: "form-label" %><br />
+            <%= f.select :minutes, (0..59).to_a, { required: true }, class: "form-control" %>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :status, class: "form-label" %><br />
+        <%= f.select :status, options_for_select(['inprogress', 'complete']), { required: true }, class: "form-control" %>
+      </div>
+      <div class="actions">
+        <%= f.submit "Submit", class: "btn btn-primary", style: "background-color: #365486; border-color: #365486;" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<%= render 'layouts/sidebar' %>

@@ -19,7 +19,7 @@ end
     Company.find_or_create_by!(company_name: company_name)
   end
 
-  departments = ['ROR', 'Python','.Net' ,'Bi' , 'Aws']
+  departments = ['ROR', 'Python','.Net' ,'Bi' , 'Aws','Hr' , 'Accounts' , 'Admin']
   departments.each do |department_name|
     Department.find_or_create_by!(department_name: department_name)
   end
@@ -38,6 +38,7 @@ end
     u.password = '123456'
     u.role_id = Role.find_by(role_name: 'Root').id
   end
+
 
   project = Project.find_or_create_by(name: 'costpe') do |u|
     u.client_id = Client.find_by(client_name: 'Righton').id

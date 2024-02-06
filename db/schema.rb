@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_05_103157) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_06_055655) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -59,9 +59,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_103157) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "is_active", default: true
     t.bigint "user_id", null: false
     t.bigint "client_id", null: false
-    t.boolean "is_active", default: true
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_103157) do
   end
 
   create_table "workreports", force: :cascade do |t|
-    t.date "current_date"
+    t.date "date"
     t.text "tasks"
     t.integer "hours"
     t.string "status"
@@ -109,6 +109,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_05_103157) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.bigint "project_id", null: false
+    t.integer "minutes"
     t.index ["project_id"], name: "index_workreports_on_project_id"
     t.index ["user_id"], name: "index_workreports_on_user_id"
   end

@@ -40,7 +40,14 @@ class UsersController < ApplicationController
 
       def edit
         @user = User.find(params[:id])
-
+      end
+      def update
+        @user = User.find(params[:id])
+        if @user.update(user_params)
+          redirect_to @user, notice: 'User profile was successfully updated.'
+        else
+          render :edit
+        end
       end
 
 
@@ -60,5 +67,9 @@ class UsersController < ApplicationController
 
 
     def user_params
-     params.require(:user).permit(:email, :password, :role_id, :company_id, :department_id, :designation_id)
+      if action_name == 'create'
+        params.require(:user).permit(:email, :password, :role_id, :company_id, :department_id, :designation_id)
+      elsif action_name == 'update'
+        params.require(:user).permit(:f_name, :l_name, :accountnumber, :ifsc, :mobileNumber, :joiningDate)
+      end
     end

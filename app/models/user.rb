@@ -8,6 +8,7 @@ class User < ApplicationRecord
   belongs_to :designation , optional: true
   belongs_to :department,   optional: true
   has_one :email_hierarchy
+  has_many :workreport
 
 
 
