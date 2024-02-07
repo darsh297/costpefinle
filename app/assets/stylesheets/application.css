@@ -213,3 +213,12 @@
 .btn:hover {
   background-color: #2c4368; /* Darken the background color on hover */
 }
+
+
+body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .form-control, .tooltip-text, .icon-text {
+  font-family: 'Creative', Arial, Helvetica, sans-serif;
+}
+@font-face {
+  font-family: 'Creative';
+  src: url('path/to/Creative.ttf') format('truetype');
+}

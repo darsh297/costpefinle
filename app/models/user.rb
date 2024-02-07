@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
 
 
-  validate :unique_super_admin_user, if: :super_admin?
+  # validate :unique_super_admin_user, if: :super_admin?
 
   validates :designation, presence: true, unless: -> { role_id == 2 }
   validates :department, presence: true, unless: -> { role_id == 2 }

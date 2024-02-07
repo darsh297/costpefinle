@@ -1,43 +1,41 @@
 <div class="content">
-  <div style=" margin-top: 60px; display: flex;">
+  <div style="margin-top: 60px; display: flex;">
     <h1 style="flex-grow: 1;">Work Report</h1>
     <div class="icon-link">
-    <%= link_to new_workreport_path, class: "float-end" do %>
-      <%= image_tag("action/note.png", alt: "New Work Report", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
-              <p class="icon-text">Create Report</p>
-    <% end %>
-     <%= link_to others_workreports_path, class: "float-end" do %>
-      <%= image_tag("action/report.png", alt: "New Work Report", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
-              <p class="icon-text">Other</p>
-    <% end %>
-
-  </div>
+      <%= link_to new_workreport_path(user_id: current_user.id), class: "float-end" do %>
+        <%= image_tag("action/note.png", alt: "New Work Report", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
+        <p class="icon-text">Create Report</p>
+      <% end %>
+      
+      <% unless current_user.role_id == 6 %>
+        <%= link_to others_workreports_path, class: "float-end" do %>
+          <%= image_tag("action/menu.png", alt: "New Work Report", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
+          <p class="icon-text">Other</p>
+        <% end %>
+      <% end %>
+    </div>
   </div>
   
- <table class="table table-bordered table-striped">
-      <thead class="thead-dark">
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
       <tr>
         <th>Date</th>
         <th>Tasks</th>
         <th>Status</th>
+        
       </tr>
     </thead>
     <tbody>
-  <% @workreport.each do |workreport| %>
-    <tr>
-      <td><%= workreport.date %></td>
-      <td><%= workreport.tasks %></td>
-      <td><%= workreport.status ? 'Completed' : 'In Progress' %></td>
-    </tr>
-  <% end %>
-</tbody>
-
+      <% @workreport.each do |workreport| %>
+        <tr>
+          <td><%= workreport.date %></td>
+          <td><%= workreport.tasks %></td>
+          <td><%= workreport.status == 'inprogress' ? 'Incomplete' : 'Complete' %></td>
+         
+        </tr>
+      <% end %>
+    </tbody>
   </table>
 </div>
-</div>
- <div style="position: absolute; top: 130px; right: 10px;">
- 
-    </div>
-    </div >
-    </div>
- <%= render 'layouts/sidebar' %>
+
+<%= render 'layouts/sidebar' %>
