@@ -3,8 +3,8 @@
     <h1 style="flex-grow: 1;">Projects</h1>
 
       <%= link_to  new_project_path, class: "float-end" do %>
-      <%= image_tag("action/project.png", alt: "New user", class: "btn-icon", style: "height: 40px; width: 40px;") %> 
-    <% end %>   
+      <%= image_tag("action/add.png", alt: "New user", class: "btn-icon", style: "height: 30px; width: 30px;") %>
+    <% end %>
   </div>
 
   <% if @projects.any? %>
@@ -25,12 +25,15 @@
             <td><%= index + 1 %></td>
             <td><%= project.name%>
             <td><%= project.client&.client_name %></td>
-            <td><%= project.user_id %></td>
-             <td>
+            <td><%= User.find(project.user_id).f_name %></td>
+            <td>
               <%= link_to soft_delete_project_path(project), method: :delete, data: { turbo_method: :delete }, class: 'btn-delete' do %>
-                <%= image_tag('action/status.png', height: 40) %>
-               
+              <%= image_tag('action/delete.png', height: 30) %>
               <% end %>
+
+              <%= link_to project, class: 'btn-delete' do %>
+                <%= image_tag('action/show.png', height: 28) %>
+                <% end %>
             </td>
 
           </tr>
@@ -41,6 +44,3 @@
 </div>
 
 <%= render 'layouts/sidebar' %>
-
-
-

@@ -1,22 +1,20 @@
 <div class="content">
   <div style="text-align: left; margin-top:60px">
     <h1>Edit Profile</h1>
-</div>
+  </div>
 
-   <div class="profile-details">
+  <div class="profile-details">
     <%= form_for @user, url: user_path(@user), method: :patch do |f| %>
       <p><strong>First Name:</strong> <%= f.text_field :f_name %></p>
       <p><strong>Last Name:</strong> <%= f.text_field :l_name %></p>
       <p><strong>Account Number:</strong> <%= f.text_field :accountnumber %></p>
       <p><strong>IFSC:</strong> <%= f.text_field :ifsc %></p>
       <p><strong>Mobile Number:</strong> <%= f.text_field :mobileNumber %></p>
-      <p><strong>Joining Date:</strong> <%= f.date_field :joiningDate %></p>
+      <p><strong>Joining Date:</strong> <%= f.date_field :joiningDate, max: Date.today %></p>
       <%= f.submit 'Update' %>
     <% end %>
   </div>
 
-  
-   
-  </div>
-  </div>
-  <%= render 'layouts/sidebar' %>
+</div>
+
+<%= render 'layouts/sidebar' %>

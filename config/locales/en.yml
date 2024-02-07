@@ -28,4 +28,23 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Email can't be blank"
+              format: "Invalid email format"
+            password:
+              blank: "Password can't be blank"
+              too_short: "Password is too short (minimum is 6 characters)"
+            role_id:
+              blank: "Role can't be blank"
+            company_id:
+              blank: "Company can't be blank"
+            department_id:
+              blank: "Department can't be blank"
+            designation_id:
+              blank: "Designation can't be blank"
+

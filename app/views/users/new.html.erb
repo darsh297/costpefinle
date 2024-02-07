@@ -1,42 +1,51 @@
-<%= stylesheet_link_tag 'user_form', media: 'all', 'data-turbolinks-track': 'reload' %>
 
 <div class="content">
   <div style="text-align: left; margin-top: 60px;">
     <%= form_for(:user, url: create_path, data: { turbo: false }) do |f| %>
       <div class="field">
         <h1 style="color: #365486;">Add User</h1>
-        <%= f.label :email, class: "form-label" %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %> <br />
-        <%= display_errors(f, :email) %>
+        <%= f.label :email, class: "form-label" %><span class="required">*</span><br />
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control", required: true %> <br />
+        <% if @user.errors[:email].any? %>
+          <div class="error-message"><%= @user.errors[:email].first %></div>
+        <% end %>
       </div>
 
       <div class="field">
-        <%= f.label :password, class: "form-label" %>
+        <%= f.label :password, class: "form-label" %><span class="required">*</span>
         <% if @minimum_password_length %>
-          <em><%= @minimum_password_length %> characters minimum)</em>
+          <em><%= @minimum_password_length %> characters minimum</em>
         <% end %><br />
         <%= f.password_field :password, autocomplete: "new-password", class: "form-control", required: true %><br />
-        <%= display_errors(f, :password) %>
+        <% if @user.errors[:password].any? %>
+          <div class="error-message"><%= @user.errors[:password].first %></div>
+        <% end %>
       </div>
 
       <div class="field">
         <div class="form-group">
           <div class="half-width">
-            <%= f.label :role_id, class: "form-label" %><br />
+            <%= f.label :role_id, class: "form-label" %><span class="required">*</span><br />
             <% if current_user.role_id == 1 %>
               <%= f.collection_select :role_id,Role.where.not(id: [1]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true %>
             <% else %>
-            <%= f.collection_select :role_id, Role.where.not(id: [1, 2]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true, id: "role-select" %>            <% end %>
+              <%= f.collection_select :role_id, Role.where.not(id: [1, 2]), :id, :role_name, { prompt: "Select a role" }, class: "form-control", required: true, id: "role-select" %>
+            <% end %>
+            <% if @user.errors[:role_id].any? %>
+              <div class="error-message"><%= @user.errors[:role_id].first %></div>
+            <% end %>
           </div>
           <div class="half-width" class>
-             <%= f.label :company_id, class: "form-label" %><br />
+            <%= f.label :company_id, class: "form-label" %><span class="required">*</span><br />
             <% if current_user.role_id == 2 %>
               <%= f.hidden_field :company_id, value: current_user.company_id %>
               <%= current_user.company.company_name %>
             <% else %>
               <%= f.collection_select :company_id, Company.all, :id, :company_name, { prompt: "Select a company" }, class: "form-control", required: true %>
-              <%= display_errors(f, :company_id) %>
-            <% end %><br />
+            <% end %>
+            <% if @user.errors[:company_id].any? %>
+              <div class="error-message"><%= @user.errors[:company_id].first %></div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -44,14 +53,18 @@
       <div class="field" id="designation-department-fields">
         <div class="form-group">
           <div class="half-width">
-            <%= f.label :department_id, class: "form-label" %><br />
+            <%= f.label :department_id, class: "form-label" %><span class="required">*</span><br />
             <%= f.collection_select :department_id, Department.all, :id, :department_name, { prompt: "Select a department" }, { class: "form-control" } %><br />
-            <%= display_errors(f, :department_id) %>
+            <% if @user.errors[:department_id].any? %>
+              <div class="error-message"><%= @user.errors[:department_id].first %></div>
+            <% end %>
           </div>
           <div class="half-width">
-            <%= f.label :designation_id, class: "form-label" %><br />
+            <%= f.label :designation_id, class: "form-label" %><span class="required">*</span><br />
             <%= f.collection_select :designation_id, Designation.all, :id, :name, { prompt: "Select a department" }, { class: "form-control" } %><br />
-            <%= display_errors(f, :designation_id) %>
+            <% if @user.errors[:designation_id].any? %>
+              <div class="error-message"><%= @user.errors[:designation_id].first %></div>
+            <% end %>
           </div>
         </div>
       </div>
@@ -65,31 +78,3 @@
 </div>
 
 <%= render 'layouts/sidebar' %>
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  var roleSelect = document.getElementById("role-select");
-  var designationDepartmentFields = document.getElementById("designation-department-fields");
-
-  // Initial state
-  toggleFields();
-
-  // Add event listener to role select
-  roleSelect.addEventListener("change", function() {
-    toggleFields();
-  });
-
-  // Function to toggle visibility of fields based on selected role
-  function toggleFields() {
-    var selectedRoleId = roleSelect.value;
-
-    // Check if the selected role is company admin (role_id == 2)
-    if (selectedRoleId == 2) {
-      designationDepartmentFields.style.display = "none"; // Hide the designation and department fields
-    } else {
-      designationDepartmentFields.style.display = "block"; // Show the designation and department fields
-    }
-  }
-});
-</script>
-

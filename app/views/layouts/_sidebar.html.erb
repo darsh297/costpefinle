@@ -12,17 +12,16 @@
        <br/>
         <%= link_to  workreports_path do %>
         <%= image_tag("login/report.png", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
-        Workreport
+        WorkReport
       <% end %>
       <br/>
   <% if can? :create, User %>
         <%= link_to users_path do %>
           <%= image_tag("login/management.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
-          Manage 
+          Administer
         <% end %>
-        <br/> 
+        <br/>
       <% end %>
-     
 
  </div>
 
@@ -31,6 +30,6 @@
         <%= image_tag("login/power-off.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
         Logout
       <% end %>
-       
+
 
 </div>

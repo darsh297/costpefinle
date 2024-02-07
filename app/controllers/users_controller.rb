@@ -44,8 +44,12 @@ class UsersController < ApplicationController
       def update
         @user = User.find(params[:id])
         if @user.update(user_params)
-          redirect_to @user, notice: 'User profile was successfully updated.'
-        else
+          if Date.parse(params[:user][:joiningDate]) > Date.today
+            # Add an error message to the user object
+            @user.errors.add(:joiningDate, "cannot be a future date")
+            # Render the edit view again with the updated @user object
+            redirect_to user_path, notice: 'User profile was successfully updated.'
+          else
           render :edit
         end
       end
@@ -73,3 +77,4 @@ class UsersController < ApplicationController
         params.require(:user).permit(:f_name, :l_name, :accountnumber, :ifsc, :mobileNumber, :joiningDate)
       end
     end
+  end

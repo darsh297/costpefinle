@@ -5,7 +5,7 @@
   <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
     <div class="icon-link">
       <%= link_to new_user_path, class: "float-end" do %>
-        <%= image_tag("action/user.png", alt: "New user", class: "btn-icon", style: "height: 30px; width: 28px;") %> 
+        <%= image_tag("action/user.png", alt: "New user", class: "btn-icon", style: "height: 30px; width: 28px;") %>
         <p class="icon-text">New User</p>
       <% end %>
     </div>
@@ -24,13 +24,16 @@
       <% end %>
     </div>
 
-    <div class="icon-link">
-      <%= link_to email_hierarchys_path, class: "float-end" do %>
-        <%= image_tag("action/email.png", alt: "New user", class: "btn-icon", style: "height: 30px; width: 30px;") %>
-        <p class="icon-text">Email Hierarchy</p>
+      <div class="icon-link">
+
+      <% unless current_user.role_id == 6 %>
+        <%= link_to others_workreports_path, class: "float-end btn-icon-container" do %>
+          <%= image_tag("action/add.png", alt: "New Work Report", class: "btn-icon", style: "height: 30px; width: 30px;") %>
+          <p class="icon-text">Other WorkReport</p>
+          <% end %>
       <% end %>
 
-     
+
     </div>
   </div>
   </div>
@@ -56,14 +59,17 @@
             <td><%= user.role&.role_name %></td>
             <td>
 
-                <%= link_to soft_delete_user_path(user), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure? This action cannot be undone.' }, class: 'btn-delete' do %>
-                <%= image_tag('action/delete.png', height: 30) %> 
-                <span class="tooltip-text">Delete</span>
-              <% end %>
-                  
+            <% unless current_user.role_id == 1 %>
+            <%= link_to soft_delete_user_path(user), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure? This action cannot be undone.' }, class: 'btn-delete' do %>
+              <%= image_tag('action/delete.png', height: 30) %>
+              <span class="tooltip-text">Delete</span>
+            <% end %>
+          <% end %>
+
+
 
                 <%= link_to user, class: 'btn-delete' do %>
-                <%= image_tag('action/show.png', height: 30) %> 
+                <%= image_tag('action/show.png', height: 30) %>
                 <span class="tooltip-text">Show</span>
               <% end %>
             </td>

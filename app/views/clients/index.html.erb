@@ -1,8 +1,15 @@
 <div class="content">
   <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
     <h1 style="flex-grow: 1;">Clients</h1>
-  </div>
+    <div class="icon-link">
 
+  <%= link_to  new_client_path, class: "float-end" do %>
+    <%= image_tag("action/add.png", alt: "New user", class: "btn-icon", style: "height: 40px; width: 40px;") %>
+    <p class="icon-text btn-icon-text">Add Client</p>
+
+  <% end %>
+</div>
+</div>
   <% if @client.any? %>
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">

@@ -9,7 +9,9 @@ class ProjectsController < ApplicationController
   end
 
   end
-
+  def show
+    @project =current_user.projects
+  end
   def new
     @project = Project.new
   end

@@ -222,3 +222,28 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
   font-family: 'Creative';
   src: url('path/to/Creative.ttf') format('truetype');
 }
+
+
+  .btn-icon-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .btn-icon-text {
+    visibility: hidden;
+    background-color: #fff;
+    color: #000;
+    text-align: center;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 5px;
+    position: absolute;
+    z-index: 1;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .btn-icon-container:hover .btn-icon-text {
+    visibility: visible;
+  }
