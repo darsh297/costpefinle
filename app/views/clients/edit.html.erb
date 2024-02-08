@@ -1,0 +1,21 @@
+<div class="content">
+  <div style="text-align: left; margin-top:60px">
+    <h1>Edit Client</h1>
+  </div>
+
+  <div class="profile-details">
+    <%= form_for @clients, url: client_path(@client), method: :patch do |f| %>
+      <p><strong>Client Name:</strong> <%= f.text_field :client_name %></p>
+     <p>
+  <p>
+  <strong>Client Status:</strong>
+  <%= f.select :is_active, options_for_select([['Active', true], ['Deactivated', false]], f.object.is_active), { prompt: 'Select Status' }, class: "form-control" %>
+</p>
+
+      <%= f.submit 'Update' %>
+    <% end %>
+  </div>
+
+</div>
+
+<%= render 'layouts/sidebar' %>

@@ -2,27 +2,48 @@
   <div style="text-align: left; margin-top: 80px; display: flex; align-items: center; justify-content: space-between;">
     <h1 style="flex-grow: 1;">Clients</h1>
     <div class="icon-link">
-
-  <%= link_to  new_client_path, class: "float-end" do %>
-    <%= image_tag("action/add.png", alt: "New user", class: "btn-icon", style: "height: 40px; width: 40px;") %>
-    <p class="icon-text btn-icon-text">Add Client</p>
-
-  <% end %>
-</div>
-</div>
-  <% if @client.any? %>
+      <%= link_to new_client_path, class: "float-end" do %>
+        <%= image_tag("action/add.png", alt: "New Client", class: "btn-icon", style: "height: 30px; width: 30px;") %>
+        <p class="icon-text">Add Client</p>
+      <% end %>
+    </div>
+  </div>
+  <% if @clients.any? %>
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
         <tr>
           <th>No</th>
           <th>Client</th>
+          <th>Status</th>
+          <th>Action</th>
+          
         </tr>
       </thead>
       <tbody>
-        <% @client.each_with_index do |client, index| %>
+        <% @clients.each_with_index do |client, index| %>
           <tr>
             <td><%= index + 1 %></td>
-            <td><%= client.client_name %></td>
+            <td><%= client.client_name %></td> 
+            <td>
+              <% if client.is_active %>
+                Active
+              <% else %>
+                Deactivated
+              <% end %>
+            </td>
+
+            <td>
+              <%= link_to client, class: 'btn-delete' do %>
+                <%= image_tag('action/show.png', height: 30) %>
+                              <span class="tooltip-text">Show</span>
+
+              <% end %>
+
+              <%= link_to soft_delete_client_path(client), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure? This action cannot be undone.' }, class: 'btn-delete' do %>
+              <%= image_tag('action/delete.png', height: 30) %>
+              <span class="tooltip-text">Delete</span>
+            <% end %>
+            </td>
           </tr>
         <% end %>
       </tbody>

@@ -1,13 +1,12 @@
 class WorkreportsController < ApplicationController
   def index
-    @workreport = current_user.workreport
+    @workreports = current_user.workreports
     @users = User.all  # Or however you are fetching the users
   end
 
   def show
     if current_user.role_id == 1
-      @workreport = Workreport.all
-      # @workreport = @workreport.joins(:user).where('users.f_name ILIKE ?', "%#{params[:user_first_name]}%")
+      @workreport = Workreport.all.order(date: :desc)       # @workreport = @workreport.joins(:user).where('users.f_name ILIKE ?', "%#{params[:user_first_name]}%")
 
     else
   users_in_same_company = User.where(company_id: current_user.company_id)
@@ -18,7 +17,7 @@ class WorkreportsController < ApplicationController
 
   def new
      @workreport = Workreport.new
-  @users = User.all
+     @users = User.all
 
   if params[:user_id].present?
     @workreport.user_id = params[:user_id]
@@ -37,7 +36,11 @@ class WorkreportsController < ApplicationController
 
 
     if @workreport.save
-      redirect_to workreports_path
+       if params[:user_id].present?
+        redirect_to workreports_path
+       else
+        redirect_to others_workreports_path
+       end
     else
       render 'new'
     end

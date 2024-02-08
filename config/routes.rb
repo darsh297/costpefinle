@@ -20,6 +20,11 @@ Rails.application.routes.draw do
       delete :soft_delete
     end
   end
+   resources :clients do
+    member do
+      delete :soft_delete
+    end
+  end
 
   resources :workreports do
     collection do

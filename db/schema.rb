@@ -19,7 +19,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_07_210032) do
     t.boolean "is_active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "user_id", null: false
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 

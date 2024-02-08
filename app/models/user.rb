@@ -8,17 +8,28 @@ class User < ApplicationRecord
   belongs_to :designation , optional: true
   belongs_to :department,   optional: true
   has_one :email_hierarchy
-  has_many :workreport
+  has_many :workreports
+  has_many :clients
 
 
 
-  # validate :unique_super_admin_user, if: :super_admin?
+
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
-
+  validate :password_no_spaces
   validates :designation, presence: true, unless: -> { role_id == 2 }
   validates :department, presence: true, unless: -> { role_id == 2 }
 
 
+def password_no_spaces
+  if password&.include?(' ')
+    errors.add(:password, "can't contain spaces")
+  end
+end
+
+
+  def active_for_authentication?
+    super && isactive?
+  end
 
   def soft_delete
     update_attribute(:isactive, false)

@@ -1,0 +1,18 @@
+<div class="content">
+  <div style="text-align: left; margin-top:60px">
+    <h1>Edit Client</h1>
+  </div>
+
+  <div class="profile-details">
+    <%= form_for @project, url: project(@project), method: :patch do |f| %>
+      <p><strong>Project Name:</strong> <%= f.text_field :name %></p>
+     <p>
+  <p>
+  
+      <%= f.submit 'Update' %>
+    <% end %>
+  </div>
+
+</div>
+
+<%= render 'layouts/sidebar' %>

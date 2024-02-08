@@ -59,12 +59,12 @@
             <td><%= user.role&.role_name %></td>
             <td>
 
-            <% unless current_user.role_id == 1 %>
+           
             <%= link_to soft_delete_user_path(user), method: :delete, data: { turbo_method: :delete, confirm: 'Are you sure? This action cannot be undone.' }, class: 'btn-delete' do %>
               <%= image_tag('action/delete.png', height: 30) %>
               <span class="tooltip-text">Delete</span>
             <% end %>
-          <% end %>
+         
 
 
 

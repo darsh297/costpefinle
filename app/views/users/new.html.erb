@@ -1,7 +1,17 @@
-
 <div class="content">
   <div style="text-align: left; margin-top: 60px;">
-    <%= form_for(:user, url: create_path, data: { turbo: false }) do |f| %>
+    <%= form_with model: @user do |f| %>
+   <% if @user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+ 
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= errors.full_messages %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
       <div class="field">
         <h1 style="color: #365486;">Add User</h1>
         <%= f.label :email, class: "form-label" %><span class="required">*</span><br />

@@ -82,6 +82,11 @@
       max-width: 20%;
       max-height: 20%;
     }
+.image-logo {
+  width: 70%;
+  height: 70%;
+  /* Add any other styles as needed */
+}
 
     .login-container {
       text-align: center;
@@ -110,8 +115,8 @@
   .sidebar a img {
     vertical-align: middle;
     margin-right: 5px;
-    height: 20px;
-    width: 20px;
+    height: 180px;
+    width: 180px;
   }
   
   .sidebar a:hover img {
@@ -209,6 +214,7 @@
   color: #fff;
   cursor: pointer;
 }
+
 
 .btn:hover {
   background-color: #2c4368; /* Darken the background color on hover */
