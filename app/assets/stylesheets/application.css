@@ -30,10 +30,61 @@
 
   .profile-details {
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 10px;
     background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
   }
+  
+  .profile-details h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #eee; /* Add a border bottom for separation */
+    padding-bottom: 10px;
+  }
+  
+  .profile-details p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .profile-details .info {
+    margin-bottom: 20px;
+  }
+  
+  .profile-details .info label {
+    display: block;
+    color: #555;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .profile-details .info span {
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .profile-details .actions {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .profile-details .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 16px;
+  }
+  
+  .profile-details .btn:hover {
+    background-color: #0056b3; /* Darken the background color on hover */
+  }
+  
 
   .sidebar a {
     color: white;
@@ -175,7 +226,8 @@
 
 .report-form {
   width: 80%; /* Adjust the width as needed */
-  margin: auto;
+  max-width: 600px; /* Set a maximum width */
+  margin: 80px auto; /* Center the form vertically and horizontally */
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 10px;
@@ -253,3 +305,29 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
   .btn-icon-container:hover .btn-icon-text {
     visibility: visible;
   }
+
+  .chip {
+  background-color: #e0e0e0;
+  color: #333;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  cursor: pointer;
+
+}
+
+
+.select2-selection__choice {
+  display: inline-block;
+  padding: 3px 5px;
+  border-radius: 5px;
+  background-color: #ccc;
+  margin-right: 5px;
+}
+
+.show-chips .select2-selection__choice {
+  background-color: #369;
+  color: #fff;
+}
+

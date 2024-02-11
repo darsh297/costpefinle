@@ -1,0 +1,107 @@
+<div class="content">
+  <div style="margin-top: 60px; display: flex; align-items: center;">
+    <h1 style="flex-grow: 1;">Work Report</h1>
+    <div class="icon-link" style="display: flex; align-items: baseline;">
+    <div class="form-group" style="height: 40px; margin-right: 20px;">
+      <input type="text" id="searchInput" placeholder="Search by Name" class="form-control" style="height: 100%;">
+    </div>
+    <!-- Filter by Year -->
+    <div class="form-group" style="height: 50px; margin-right: 20px;">
+      <select id="filterYear" class="form-control">
+        <option value="">Select Year</option>
+        <!-- Populate options dynamically with years -->
+        <% (2020..Time.now.year).to_a.reverse.each do |year| %>
+          <option value="<%= year %>"><%= year %></option>
+        <% end %>
+      </select>
+    </div>
+    <!-- Filter by Month -->
+    <div class="form-group" style="height: 50px; margin-right: 20px;">
+      <select id="filterMonth" class="form-control">
+        <option value="">Select Month</option>
+        <!-- Populate options dynamically with months -->
+        <% Date::MONTHNAMES.compact.each_with_index do |month, index| %>
+          <option value="<%= index + 1 %>"><%= month %></option>
+        <% end %>
+      </select>
+    </div>
+    <!-- Filter by Date -->
+    <div class="form-group" style="height: 50px; margin-right: 20px;">
+      <input type="date" id="filterDate" class="form-control">
+    </div>
+
+
+      <%= link_to new_workreport_path, class: "float-end" do %>
+        <%= image_tag("action/add.png", alt: "New Work Report", class: "btn-icon", style: "height: 25px; width: 25px; margin-left: 10px;") %>
+        <p class="icon-text" style="margin-left: 10px;">Add Other WorkReport</p>
+      <% end %>
+    </div>
+  </div>
+
+  <table id="workReportTable" class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>Name</th>
+        <th>Date</th>
+        <th>Tasks</th>
+        <th>Created_by</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @workreport.each do |workreport| %>
+        <tr>
+          <td><%= workreport.user.f_name %></td>
+          <td><%= workreport.date %></td>
+          <td><%= workreport.tasks %></td>
+          <td><%= User.find(workreport.created_by).f_name %></td>
+          <td><%= workreport.status == 'inprogress' ? 'Incomplete' : 'Complete' %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<%= render 'layouts/sidebar' %>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const filterYear = document.getElementById('filterYear');
+    const filterMonth = document.getElementById('filterMonth');
+    const filterDate = document.getElementById('filterDate');
+    const tableRows = document.querySelectorAll('#workReportTable tbody tr');
+
+    // Event listener for search input
+    searchInput.addEventListener('keyup', function() {
+      filterRows();
+    });
+
+    // Event listeners for filters
+    [filterYear, filterMonth, filterDate].forEach(filter => {
+      filter.addEventListener('change', function() {
+        filterRows();
+      });
+    });
+
+    // Function to filter table rows based on input values
+    function filterRows() {
+      const searchValue = searchInput.value.toLowerCase();
+      const yearValue = filterYear.value;
+      const monthValue = filterMonth.value;
+      const dateValue = filterDate.value;
+
+      tableRows.forEach(row => {
+        const userName = row.querySelector('td:first-child').textContent.toLowerCase();
+        const dateText = row.querySelector('td:nth-child(2)').textContent;
+
+        const showRow = userName.includes(searchValue) &&
+          (yearValue === '' || dateText.includes(yearValue)) &&
+          (monthValue === '' || dateText.includes(monthValue)) &&
+          (dateValue === '' || dateText.includes(dateValue));
+
+        row.style.display = showRow ? '' : 'none';
+      });
+    }
+  });
+</script>

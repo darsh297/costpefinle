@@ -1,9 +1,17 @@
 class UsersController < ApplicationController
       def index
         if current_user.role_id == 2
-          @users = User.where(company_id: current_user.company_id, isactive: true, role_id: [2, 3, 4, 5,6])
+          @filtered_users = User.where(company_id: current_user.company_id, isactive: true, role_id: [2, 3, 4, 5,6])
         else
-          @users = User.where(isactive: true)
+          if current_user.role_id == 1
+            if params[:company_id].present?
+              @filtered_users = User.where(company_id: params[:company_id])
+            else
+              @filtered_users = User.all
+            end
+          else
+            @filtered_users = User.all
+          end
         end
       end
 
@@ -71,7 +79,7 @@ end
 
     def user_params
       if action_name == 'create'
-        params.require(:user).permit(:email, :password, :role_id, :company_id, :department_id, :designation_id)
+        params.require(:user).permit(:profile_picture, :email, :password, :role_id, :company_id, :department_id, :designation_id)
       elsif action_name == 'update'
         params.require(:user).permit(:f_name, :l_name, :accountnumber, :ifsc, :mobileNumber, :joiningDate)
       end

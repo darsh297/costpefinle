@@ -5,8 +5,12 @@ class WorkreportsController < ApplicationController
   end
 
   def show
+   @workreports = Workreport.find(params[:id])
+  end
+
+  def others
     if current_user.role_id == 1
-      @workreport = Workreport.all.order(date: :desc)       # @workreport = @workreport.joins(:user).where('users.f_name ILIKE ?', "%#{params[:user_first_name]}%")
+      @workreport = Workreport.all.order(date: :desc)
 
     else
   users_in_same_company = User.where(company_id: current_user.company_id)
@@ -15,16 +19,19 @@ class WorkreportsController < ApplicationController
     end
   end
 
-  def new
-     @workreport = Workreport.new
-     @users = User.all
 
-  if params[:user_id].present?
-    @workreport.user_id = params[:user_id]
-    @workreport.date = Date.current
-  else
-    set_default_date
-  end
+  def new
+    @workreport = Workreport.new
+    @users = User.all
+
+ if params[:user_id].present?
+   @workreport.user_id = params[:user_id]
+   @workreport.date = Date.current
+ else
+   set_default_date
+ end
+
+
 
     # If params[:user_id] is present, set the user_id accordingly
   end
@@ -35,16 +42,35 @@ class WorkreportsController < ApplicationController
 
 
 
-    if @workreport.save
-       if params[:user_id].present?
+      if @workreport.save
+        if @workreport.user_id == current_user
         redirect_to workreports_path
        else
-        redirect_to others_workreports_path
+        redirect_to workreports_path
        end
     else
       render 'new'
     end
   end
+
+
+  def edit
+    @workreport = Workreport.find(params[:id])
+    if Time.now.hour < 12 && @workreport.date >= Date.today - 1
+  end
+end
+
+  def update
+    @workreport = Workreport.find(params[:id])
+    if @workreport.update(workreport_params)
+      redirect_to @workreport, notice: 'workreport was successfully updated.'
+    else
+      render :edit
+    end
+
+
+  end
+
 
   private
 

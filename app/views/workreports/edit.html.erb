@@ -2,7 +2,7 @@
   <div style="text-align: left;">
     <%= form_for(@workreport, html: { class: "report-form" }) do |f| %>
       <div class="field">
-        <h1 style="color: #365486;">New Work Report</h1>
+        <h1 style="color: #365486;">Edit Work Report</h1>
       </div>
 
       <% unless params[:user_id].present? %>
@@ -11,29 +11,17 @@
           <%= f.date_field :date, class: "form-control", required: true, max: Date.today %>
         </div>
       <% else %>
-      <% if Time.now.hour > 12 %>
-      <%= f.date_field :date, value: Date.today, class: "form-control", required: true, readonly: true, max: Date.today %>
-      <% else %>
-      <%= f.date_field :date, class: "form-control", required: true, min: Date.yesterday, max: Date.today, onchange: "checkDate(this)" %>
-      <% end %>
-
-      <% end %>
-
-      <% unless params[:user_id].present? %>
-        <div class="field">
-          <%= f.label :user_id, "User", class: "form-label" %><br />
-          <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
-        </div>
-      <% else %>
-        <%= f.hidden_field :user_id, value: params[:user_id] %>
+        <% if Time.now.hour > 12 %>
+          <%= f.date_field :date, value: Date.today, class: "form-control", required: true, readonly: true, max: Date.today %>
+        <% else %>
+          <%= f.date_field :date, class: "form-control", required: true, min: Date.yesterday, max: Date.today, onchange: "checkDate(this)" %>
+        <% end %>
       <% end %>
 
       <div class="field">
-  <%= f.label :project_id, "Project", class: "form-label" %><br />
-  <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
-</div>
-
-
+        <%= f.label :project_id, "Project", class: "form-label" %><br />
+        <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+      </div>
 
       <div class="field">
         <%= f.label :tasks, "Tasks", class: "form-label" %><br />
@@ -59,7 +47,7 @@
       </div>
 
       <div class="field">
-        <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+        <%= f.submit "Update", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
       </div>
     <% end %>
   </div>

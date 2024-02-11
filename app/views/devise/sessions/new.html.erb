@@ -4,42 +4,26 @@
 
 <div class="right-side">
   <%= image_tag("costpe.png", alt: "Logo", class: "login-logo") %>
-<div class="login-container">
-
-  
+  <div class="login-container">
     <h2>Sign in</h2>
     <br/>
 
     <%= form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: 'login-form' }) do |f| %>
       <div class="field">
         <%= f.label :email %><br />
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email", class: "form-control" %>
       </div>
 
       <div class="field">
-        <%= f.label :password %><br />
-        <%= f.password_field :password, autocomplete: "current-password", id: "user_password" %><br\>
-      <br\>
-      </div>
+      <%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "current-password", id: "user_password", class: "form-control" %>
+    </div>
 
-      <div class="field">
-       
-      </div>
+     <br/>
 
-      <% if devise_mapping.rememberable? %>
-        <div class="field">
-          
-        </div>
-      <% end %>
-      <br\>
-      <br\>
- 
       <div class="actions">
-             
-        <%= f.submit "Log in" %>
+        <%= f.submit "Log in" , class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
       </div>
     <% end %>
-   
-
   </div>
 </div>

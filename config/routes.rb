@@ -26,11 +26,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :workreports do
-    collection do
-      get 'others'
-    end
-  end
+
 
   post '/create', to: 'users#create'
   resources :users, only: [:index, :new, :create, :edit , :show]

@@ -2,25 +2,24 @@
   <div style="text-align: left; margin-top:60px">
     <h1>User Profile</h1>
     <%= link_to edit_user_path(@user), class: 'btn-delete' do %>
-                <%= image_tag('action/edit.png', height: 30) %> 
-                <span class="tooltip-text">Edit</span>
-              <% end %>
+      <%= image_tag('action/edit.png', height: 30) %>
+      <span class="tooltip-text">Edit</span>
+    <% end %>
   </div>
 
   <div class="profile-details">
+  <p><strong>Profile Picture:</strong></p>
+
     <p><strong>First Name:</strong> <%= @user.f_name %></p>
     <p><strong>Last Name:</strong> <%= @user.l_name %></p>
     <p><strong>Email:</strong> <%= @user.email %></p>
-    <p><strong>User Type:</strong> <%= @user.role.role_name%></p>
+    <p><strong>User Type:</strong> <%= @user.role.role_name %></p>
     <p><strong>Account Number:</strong> <%= @user.accountnumber %></p>
     <p><strong>IFSC:</strong> <%= @user.ifsc %></p>
     <p><strong>Mobile Number:</strong> <%= @user.mobileNumber %></p>
     <p><strong>Joining Date:</strong> <%= @user.joiningDate %></p>
     <p><strong>Is Active:</strong> <%= @user.isactive %></p>
   </div>
+</div>
 
-  
-   
-  </div>
-  </div>
-  <%= render 'layouts/sidebar' %>
+<%= render 'layouts/sidebar' %>

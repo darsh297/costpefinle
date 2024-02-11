@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_one :email_hierarchy
   has_many :workreports
   has_many :clients
+  has_one_attached :image
 
 
 

@@ -55,6 +55,7 @@ group :development do
   gem "web-console"
 
   gem 'pry', '~> 0.14.1'
+  gem "letter_opener", group: :development
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"

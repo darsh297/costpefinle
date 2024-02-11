@@ -4,6 +4,8 @@ class Workreport < ApplicationRecord
 
   validates :user_id, presence: true, unless: :user_with_role_six?
   validate :one_report_per_user, on: :create
+  validates :date, presence: true
+
 
   def active_users
     where(isactive: true)
