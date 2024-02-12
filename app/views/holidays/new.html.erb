@@ -1,0 +1,32 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 60px;">
+    <%= form_for(@holiday, url: holidays_path, data: { turbo: false }) do |f| %>
+      <div class="field">
+        <h1 style="color: #365486;">New Holiday</h1>
+        <%= f.label :holiday_name, "Holiday Name", class: "form-label" %><br>
+        <%= f.text_field :name, class: "form-control", required: true, placeholder: "Enter holiday name" %><br>
+
+        <%= f.label :Date, class: "form-label" %><br>
+        <%= f.date_field :holiday_date, class: "form-control", required: true, min: Date.today, placeholder: "Select holiday date" %><br>
+        <%= f.label :company_id, class: "form-label" %><span class="required">*</span><br />
+            <%= f.collection_select :company_id, Company.all, :id, :company_name,{}, class: "form-control", placeholder: "Enter holiday name" %><br>
+            <% if @holiday.errors[:company_id].any? %>
+              <div class="error-message"><%= @user.errors[:company_id].first %></div>
+            <% end %>
+          </div>
+
+
+      </div>
+      <div class="field">
+      <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+    </div>
+  <% end %>
+
+
+
+</div>
+</div>
+</div>
+
+
+<%= render 'layouts/sidebar' %>

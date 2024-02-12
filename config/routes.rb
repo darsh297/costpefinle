@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   resources :clients
   resources :projects
   resources :email_hierarchys
+  resources :holidays
 
   resources :users do
     member do

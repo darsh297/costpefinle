@@ -20,12 +20,20 @@
       <% end %>
       <br/>
 
+      <%= link_to holidays_path do %>
+        <%= image_tag("login/vacation.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
+        Holiday
+      <% end %>
+      <br/>
+
 
       <%= link_to user_path(current_user) do %>
         <%= image_tag("login/user.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
         Profile
       <% end %>
       <br/>
+
+
 
 
   <% if can? :create, User %>
