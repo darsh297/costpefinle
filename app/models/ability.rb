@@ -15,8 +15,18 @@ class Ability
     elsif user.role_id == 3
       can :manage, :all
       cannot :create, User, role_id: [1, 2,3]
-    elsif user.role_id.in?([4, 5, 6])
-      cannot :manage, User
+
+      elsif user.role_id == 4
+      can :manage, :all
+      cannot :create, User, role_id: [1, 2,3,4]
+
+    elsif user.role_id == 5 || user.role_id == 6
+      can :manage , Workreport
+      can :show , Holiday
+      cannot :update , Holiday
+      can :show, User, id: user.id
+
+      can :update, User, id: user.id
   end
 end
 end

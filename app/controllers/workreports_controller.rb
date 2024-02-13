@@ -2,14 +2,27 @@ class WorkreportsController < ApplicationController
   load_and_authorize_resource
   def index
     @workreports = current_user.workreports
-    @users = User.all  # Or however you are fetching the users
+    @users = User.all
   end
+
 def allworkreports
-  if current_user.role_id == 1
-    @workreports =Workreport.all
+
+  if current_user.role_id == 6
+
+    redirect_to root_path, alert: "Access denied"
+  elsif current_user.role_id == 1
+    @workreports = Workreport.all
+  elsif current_user.role_id == 2
+    user_ids_in_same_company = User.where(company_id: current_user.company_id).pluck(:id)
+    @workreports = Workreport.where(user_id: user_ids_in_same_company)
   else
-  user_ids_in_same_company = User.where(company_id: current_user.company_id).pluck(:id)
-  @workreports = Workreport.where(user_id: user_ids_in_same_company)
+    current_user_id = current_user.id
+    email_hierarchies = EmailHierarchy.where("to_ids LIKE ? OR cc_ids LIKE ?", "%#{current_user_id}%", "%#{current_user_id}%")
+    user_workreport_ids = email_hierarchies.pluck(:user_id).uniq
+    @workreports = Workreport.where(user_id: user_workreport_ids)
+
+
+
 end
 end
 
@@ -32,23 +45,28 @@ end
  if params[:user_id].present?
    @workreport.user_id = params[:user_id]
    @workreport.date = Date.current
+ elsif current_user.role_id == 6
+          redirect_to workreports_path
  else
    set_default_date
  end
 end
 
-  def create
+
+
+def create
     @workreport = Workreport.new(workreport_params)
     @workreport.created_by = current_user.id
 
+    if @workreport.save
 
+      # binding.pry
 
-      if @workreport.save
-        if @workreport.user_id == current_user
+      if @workreport.user_id == current_user.id
         redirect_to workreports_path
-       else
+      else
         redirect_to allworkreports_path
-       end
+      end
     else
       render 'new'
     end

@@ -9,17 +9,21 @@ class ProjectsController < ApplicationController
   end
 
   end
+
+
+
   def show
         @project = Project.find(params[:id])
-
   end
 
   def new
     @project = Project.new
+
   end
   def create
     @project = Project.new(project_params)
     @project.user_id = current_user.id
+    @project.company_id = current_user.company_id
 
     if @project.save
       redirect_to projects_path
@@ -29,7 +33,7 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-      @client = Project.find(params[:id])
+      @project = Project.find(params[:id])
   end
 
 

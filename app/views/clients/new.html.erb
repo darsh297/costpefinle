@@ -5,10 +5,12 @@
         <h1 style="color: #365486;">New Client</h1>
 
 
-      <div>
-        <%= f.label :name, class: "form-label" %><br />
+        <%= f.label :name, class: "form-label" %><span class="required">*</span><br />
         <%= f.text_field :client_name, class: "form-control", required: true %>
-      </div>
+      
+
+       <%= f.label :company_id, class: "form-label" %><span class="required">*</span><br />
+       <%= f.collection_select :company_id, Company.all, :id, :company_name, { prompt: "Select a company" }, class: "form-control", required: true %><br>
 
       <div class="field">
         <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>

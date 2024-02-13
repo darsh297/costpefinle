@@ -27,7 +27,6 @@
        <% else %>
        <%= f.collection_select :user_id, @users.where(company_id: current_user.company_id), :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
        <% end %>
-
         </div>
       <% else %>
         <%= f.hidden_field :user_id, value: params[:user_id] %>
@@ -35,10 +34,8 @@
 
       <div class="field">
   <%= f.label :project_id, "Project", class: "form-label" %><br />
-  <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+  <%= f.collection_select :project_id, Project.joins(:client).where(clients: { company_id: current_user.company_id }), :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
 </div>
-
-
 
       <div class="field">
         <%= f.label :tasks, "Tasks", class: "form-label" %><br />
@@ -69,4 +66,6 @@
     <% end %>
   </div>
 </div>
+
+
 <%= render 'layouts/sidebar' %>

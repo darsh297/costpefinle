@@ -21,7 +21,7 @@ end
     @client.user_id = current_user.id
 
     if @client.save
-      redirect_to new_client_path
+      redirect_to clients_path
     else
       render 'new'
     end
@@ -52,7 +52,7 @@ end
 
   def client_params
 
-      params.require(:client).permit(:user_id, :client_name , :is_active)
+      params.require(:client).permit(:user_id, :client_name , :is_active , :company_id )
   end
 
 

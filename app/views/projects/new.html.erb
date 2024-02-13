@@ -4,9 +4,8 @@
       <div class="field"> 
         <h1 style="color: #365486;">Add Project</h1>
         <%= f.label :client_id, class: "form-label" %><br />
-        <%= f.collection_select :client_id, Client.all, :id, :client_name, { prompt: "Select a Client" }, class: "form_control", required: true %>
+        <%= f.collection_select :client_id, Client.where(company_id: current_user.company_id), :id, :client_name, { prompt: "Select a Client" }, class: "form_control", required: true %>
       </div>
-
       <div>
         <%= f.label :name, class: "form-label" %><br />
         <%= f.text_field :name, class: "form-control", required: true %>

@@ -53,6 +53,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_034940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.integer "company_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -104,7 +105,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_13_034940) do
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
     t.boolean "is_active", default: true
-    t.bigint "client_id", null: false
+    t.integer "company_id"
+    t.bigint "client_id"
     t.index ["client_id"], name: "index_projects_on_client_id"
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
