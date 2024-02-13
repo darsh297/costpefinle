@@ -1,3 +1,6 @@
+
+
+
 class HolidaysController < ApplicationController
 
   def index
@@ -34,7 +37,7 @@ class HolidaysController < ApplicationController
   private
 
   def holiday_params
-    params.require(:holiday).permit(:name , :holiday_date , :created_by)
+    params.require(:holiday).permit(:name , :holiday_date , :company_id , :created_by)
   end
 
 

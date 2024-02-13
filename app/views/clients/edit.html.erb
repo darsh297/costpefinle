@@ -4,7 +4,7 @@
   </div>
 
   <div class="profile-details">
-    <%= form_for @clients, url: client_path(@client), method: :patch do |f| %>
+    <%= form_for @client, url: client_path(@client), method: :patch do |f| %>
       <p><strong>Client Name:</strong> <%= f.text_field :client_name %></p>
     <p>
   <p>

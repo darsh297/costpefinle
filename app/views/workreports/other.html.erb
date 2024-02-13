@@ -2,7 +2,7 @@
   <div style="text-align: left;">
     <%= form_for(@workreport, html: { class: "report-form" }) do |f| %>
       <div class="field">
-        <h1 style="color: #365486;">New Work Report</h1>
+        <h1 style="color: #365486;">Other Work Report</h1>
       </div>
 
       <% unless params[:user_id].present? %>
@@ -21,13 +21,8 @@
 
       <% unless params[:user_id].present? %>
         <div class="field">
-       <%= f.label :user_id, "User", class: "form-label" %><br />
-       <% if current_user.role_id == 1 %>
-       <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
-       <% else %>
-       <%= f.collection_select :user_id, @users.where(company_id: current_user.company_id), :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
-       <% end %>
-
+          <%= f.label :user_id, "User", class: "form-label" %><br />
+          <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
         </div>
       <% else %>
         <%= f.hidden_field :user_id, value: params[:user_id] %>

@@ -1,0 +1,33 @@
+<div class="content">
+  <div style="text-align: left; margin-top:60px">
+    <h1>Attendance Report</h1>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Date</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @attendance_data.each do |attendance| %>
+          <tr>
+            <td><%= attendance[:date] %></td>
+            <td>
+              <% if attendance[:status] == 'Present' %>
+                <div style="color: green;">&#11044;</div>
+              <% elsif attendance[:status] == 'Absent' %>
+                <div style="color: red;">&#11044;</div>
+              <% elsif attendance[:status] == 'Holiday' %>
+                <div style="color: blue;">&#11044;</div>
+              <% elsif attendance[:status] == 'Yellow Dot' %>
+                <div style="color: yellow;">&#11044;</div>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>  
+</div>
+
+<%= render 'layouts/sidebar' %>

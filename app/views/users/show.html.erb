@@ -8,18 +8,31 @@
   </div>
 
   <div class="profile-details">
-  <p><strong>Profile Picture:</strong></p>
-
-    <p><strong>First Name:</strong> <%= @user.f_name %></p>
-    <p><strong>Last Name:</strong> <%= @user.l_name %></p>
-    <p><strong>Email:</strong> <%= @user.email %></p>
-    <p><strong>User Type:</strong> <%= @user.role.role_name %></p>
-    <p><strong>Account Number:</strong> <%= @user.accountnumber %></p>
-    <p><strong>IFSC:</strong> <%= @user.ifsc %></p>
-    <p><strong>Mobile Number:</strong> <%= @user.mobileNumber %></p>
-    <p><strong>Joining Date:</strong> <%= @user.joiningDate %></p>
-    <p><strong>Is Active:</strong> <%= @user.isactive %></p>
+    <div style="float: right;">
+      <% if @user.avatar.attached? %>
+        <%= image_tag url_for(@user.avatar), alt: "User Avatar", class: "round-avatar" %>
+      <% end %>
+    </div>
+    <div style="overflow: hidden;"> 
+      <p><strong>First Name:</strong> <%= @user.f_name %></p>
+      <p><strong>Last Name:</strong> <%= @user.l_name %></p>
+      <p><strong>Email:</strong> <%= @user.email %></p>
+      <p><strong>User Type:</strong> <%= @user.role.role_name %></p>
+      <p><strong>Account Number:</strong> <%= @user.accountnumber %></p>
+      <p><strong>IFSC:</strong> <%= @user.ifsc %></p>
+      <p><strong>Mobile Number:</strong> <%= @user.mobileNumber %></p>
+      <p><strong>Joining Date:</strong> <%= @user.joiningDate %></p>
+      <p><strong>Is Active:</strong> <%= @user.isactive %></p>
+    </div>
   </div>
 </div>
 
 <%= render 'layouts/sidebar' %>
+
+<style>
+  .round-avatar {
+    border-radius: 50%; /* Makes the image round */
+    width: 100px; /* Adjust the size of the image */
+    height: 100px; /* Adjust the size of the image */
+    object-fit: cover; /* Ensure the image covers the entire container */
+  }

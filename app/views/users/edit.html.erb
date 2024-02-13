@@ -4,7 +4,9 @@
   </div>
 
   <div class="profile-details">
-    <%= form_for @user, url: user_path(@user), method: :patch, html: { multipart: true } do |f| %>
+    <%= form_for(@user) do |f| %>
+      <%= f.label "Profile Photo" %>
+      <%= f.file_field :avatar %><br>
       <p><strong>First Name:</strong> <%= f.text_field :f_name %></p>
       <p><strong>Last Name:</strong> <%= f.text_field :l_name %></p>
       <p><strong>Account Number:</strong> <%= f.text_field :accountnumber %></p>

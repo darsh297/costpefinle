@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   resources :projects
   resources :email_hierarchys
   resources :holidays
+  resources :attendances
 
   resources :users do
     member do
@@ -29,6 +30,13 @@ Rails.application.routes.draw do
 
 
 
+
+
+
   post '/create', to: 'users#create'
+  get '/other', to: 'workreports#other', as: :workreports_other
+  get '/allworkreports', to: 'workreports#allworkreports'
+
+
   resources :users, only: [:index, :new, :create, :edit , :show]
 end

@@ -11,6 +11,7 @@ class Ability
     elsif user.role_id == 2
       can :manage, :all
       cannot :create, User, role_id: [1, 2]
+      cannot :create, Workreport, user: { company_id: !user.company_id }
     elsif user.role_id == 3
       can :manage, :all
       cannot :create, User, role_id: [1, 2,3]

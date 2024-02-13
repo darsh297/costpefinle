@@ -11,6 +11,7 @@ class User < ApplicationRecord
   has_many :workreports
   has_many :clients
   has_one_attached :image
+  has_one_attached :avatar
 
 
 

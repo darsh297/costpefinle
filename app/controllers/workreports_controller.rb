@@ -1,22 +1,27 @@
 class WorkreportsController < ApplicationController
+  load_and_authorize_resource
   def index
     @workreports = current_user.workreports
     @users = User.all  # Or however you are fetching the users
   end
+def allworkreports
+  if current_user.role_id == 1
+    @workreports =Workreport.all
+  else
+  user_ids_in_same_company = User.where(company_id: current_user.company_id).pluck(:id)
+  @workreports = Workreport.where(user_id: user_ids_in_same_company)
+end
+end
 
-  def show
+def show
    @workreports = Workreport.find(params[:id])
-  end
+end
 
-  def others
-    if current_user.role_id == 1
-      @workreport = Workreport.all.order(date: :desc)
+  def other
+     @workreport = Workreport.new
+     @users = User.all
 
-    else
-  users_in_same_company = User.where(company_id: current_user.company_id)
-  @workreport = Workreport.where(user_id: users_in_same_company.pluck(:id))
 
-    end
   end
 
 
@@ -30,11 +35,7 @@ class WorkreportsController < ApplicationController
  else
    set_default_date
  end
-
-
-
-    # If params[:user_id] is present, set the user_id accordingly
-  end
+end
 
   def create
     @workreport = Workreport.new(workreport_params)
@@ -46,7 +47,7 @@ class WorkreportsController < ApplicationController
         if @workreport.user_id == current_user
         redirect_to workreports_path
        else
-        redirect_to workreports_path
+        redirect_to allworkreports_path
        end
     else
       render 'new'
