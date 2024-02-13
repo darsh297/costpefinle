@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
       def index
-        if current_user.role_id == 2
+        if current_user.role_id.in?([2, 3, 4, 5])
           @filtered_users = User.where(company_id: current_user.company_id, isactive: true, role_id: [2, 3, 4, 5,6])
         else
           if current_user.role_id == 1

@@ -20,17 +20,22 @@
       <% end %>
 
       <% unless params[:user_id].present? %>
-        <div class="field">
-       <%= f.label :user_id, "User", class: "form-label" %><br />
-       <% if current_user.role_id == 1 %>
-       <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
-       <% else %>
-       <%= f.collection_select :user_id, @users.where(company_id: current_user.company_id), :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
-       <% end %>
-        </div>
-      <% else %>
-        <%= f.hidden_field :user_id, value: params[:user_id] %>
-      <% end %>
+      <div class="field">
+        <%= f.label :user_id, "User", class: "form-label" %><br />
+        <% if current_user.role_id == 1 %>
+          <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
+        <% else %>
+          <% # Fetch the corresponding user IDs from email hierarchies to_ids and cc_ids fields %>
+          <% corresponding_user_ids = EmailHierarchy.where("to_ids LIKE ? OR cc_ids LIKE ?", "%#{current_user.id}%", "%#{current_user.id}%").pluck(:user_id) %>
+          <% # Filter users based on the corresponding user IDs and current user's company_id %>
+          <% users_for_other_reports = @users.where(id: corresponding_user_ids, company_id: current_user.company_id) %>
+          <%= f.collection_select :user_id, users_for_other_reports, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
+        <% end %>
+      </div>
+    <% else %>
+      <%= f.hidden_field :user_id, value: params[:user_id] %>
+    <% end %>
+
 
       <div class="field">
   <%= f.label :project_id, "Project", class: "form-label" %><br />

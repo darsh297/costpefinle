@@ -72,22 +72,22 @@ def create
     end
   end
 
-
   def edit
-    @workreport = Workreport.find(params[:id])
-    if Time.now.hour < 12 && @workreport.date >= Date.today - 1
+    if Time.now.hour >= 12 || @workreport.date < Date.today - 1
+      redirect_to @workreport, alert: "You cannot edit this work report after 12 PM or after the next day."
+    end
   end
-end
 
   def update
-    @workreport = Workreport.find(params[:id])
-    if @workreport.update(workreport_params)
-      redirect_to @workreport, notice: 'workreport was successfully updated.'
+    if Time.now.hour >= 12 || @workreport.date < Date.today - 1
+      redirect_to @workreport, alert: "You cannot edit this work report after 12 PM or after the next day."
     else
-      render :edit
+      if @workreport.update(workreport_params)
+        redirect_to @workreport, notice: 'Work report was successfully updated.'
+      else
+        render :edit
+      end
     end
-
-
   end
 
 

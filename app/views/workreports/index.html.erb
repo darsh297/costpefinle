@@ -35,11 +35,12 @@
               <span class="tooltip-text">Show</span>
             <% end %>
             <% if Time.now.hour < 12 && workreport.date >= Date.today - 1 %>
-              <%= link_to edit_workreport_path(workreport), class: 'btn-delete' do %>
-                <%= image_tag('action/pencil.png', height: 40) %>
-                <span class="tooltip-text">Edit</span>
-              <% end %>
-            <% end %>
+  <%= link_to edit_workreport_path(workreport), class: 'btn-delete' do %>
+    <%= image_tag('action/pencil.png', height: 40) %>
+    <span class="tooltip-text">Edit</span>
+  <% end %>
+<% end %>
+
           </td>
         </tr>
       <% end %>
