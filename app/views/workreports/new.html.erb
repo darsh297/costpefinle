@@ -5,6 +5,26 @@
         <h1 style="color: #365486;">New Work Report</h1>
       </div>
 
+
+<% if @to_emails.present? %>
+  <div class="border-box">
+    To:
+    <%= @to_emails.join(', ') %>
+
+<% end %>
+
+<br>
+
+<% if @cc_emails.present? %>
+
+    Cc:
+    <%= @cc_emails.join(', ') %>
+   
+  </div>
+<% end %>
+<br>
+
+
       <% unless params[:user_id].present? %>
         <div class="field">
           <%= f.label :report_date, "Report Date", class: "form-label" %><br />
@@ -12,8 +32,10 @@
         </div>
       <% else %>
       <% if Time.now.hour > 12 %>
+      <%= f.label :report_date, "Report Date", class: "form-label" %><br />
       <%= f.date_field :date, value: Date.today, class: "form-control", required: true, readonly: true, max: Date.today %>
       <% else %>
+      <%= f.label :report_date, "Report Date", class: "form-label" %><br />
       <%= f.date_field :date, class: "form-control", required: true, min: Date.yesterday, max: Date.today, onchange: "checkDate(this)" %>
       <% end %>
 
@@ -74,3 +96,5 @@
 
 
 <%= render 'layouts/sidebar' %>
+
+

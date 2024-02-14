@@ -331,3 +331,12 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
   color: #fff;
 }
 
+
+
+.border-box {
+  border: 1px solid #ddd; /* Border color */
+  padding: 10px; /* Padding inside the box */
+  background-color: #f9f9f9; /* Background color */
+  margin-bottom: 10px; /* Add some space between boxes */
+ color: rgb(143, 143, 143); 
+}
