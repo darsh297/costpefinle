@@ -58,11 +58,19 @@
       <%= f.hidden_field :user_id, value: params[:user_id] %>
     <% end %>
 
+<% if current_user.role_id == 1 %>
+  <div class="field">
+    <%= f.label :project_id, "Project", class: "form-label" %><br />
+    <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+  </div>
+<% else %>
+  <div class="field">
+    <%= f.label :project_id, "Project", class: "form-label" %><br />
+    <%= f.collection_select :project_id, Project.joins(:client).where(clients: { company_id: current_user.company_id }), :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+  </div>
+<% end %>
 
-      <div class="field">
-  <%= f.label :project_id, "Project", class: "form-label" %><br />
-  <%= f.collection_select :project_id, Project.joins(:client).where(clients: { company_id: current_user.company_id }), :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
-</div>
+
 
       <div class="field">
         <%= f.label :tasks, "Tasks", class: "form-label" %><br />
@@ -93,7 +101,39 @@
     <% end %>
   </div>
 </div>
+<div class="alert-container">
+  <% if notice %>
+    <p id="notice-alert" class="alert alert-success">
+      <%= notice %>
+      <span class="remove-alert" onclick="removeAlert('notice-alert')">&times;</span>
+    </p>
+  <% end %>
+  <% if alert %>
+    <p id="alert-alert" class="alert alert-danger">
+      <%= alert %>
+      <span class="remove-alert" onclick="removeAlert('alert-alert')">&times;</span>
+    </p>
+  <% end %>
+</div>
 
+
+<style>
+  .alert-container {
+  position: absolute;
+  top: 20;
+  right: 0;
+  width: 30%;
+  z-index: 9999; 
+}
+</style>
+<script>
+  function removeAlert(alertId) {
+    var alertElement = document.getElementById(alertId);
+    if (alertElement) {
+      alertElement.style.display = "none";
+    }
+  }
+</script>
 
 <%= render 'layouts/sidebar' %>
 

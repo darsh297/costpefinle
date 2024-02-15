@@ -21,7 +21,7 @@ end
     @client.user_id = current_user.id
 
     if @client.save
-      redirect_to clients_path
+      redirect_to clients_path,  notice: 'Client Added.'
     else
       render 'new'
     end
@@ -45,7 +45,7 @@ end
       @client = Client.find(params[:id])
       @client.soft_delete
 
-      redirect_to clients_path, notice: 'User was successfully soft deleted.'
+      redirect_to clients_path, notice: 'Client deactived.'
     end
 
   private

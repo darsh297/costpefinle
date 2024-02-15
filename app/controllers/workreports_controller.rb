@@ -49,7 +49,7 @@ end
    @@to_emails = User.where(id: @to).pluck(:email)
    @@cc_emails = User.where(id: @cc).pluck(:email)
  elsif current_user.role_id == 6
-          redirect_to workreports_path
+          redirect_to workreports_path,notice: "You are not authorized person to access this page"
  else
    set_default_date
  end
@@ -68,6 +68,7 @@ def create
         redirect_to workreports_path
       else
         redirect_to allworkreports_path
+
       end
     else
       render 'new'

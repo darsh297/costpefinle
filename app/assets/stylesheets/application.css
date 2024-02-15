@@ -248,7 +248,7 @@
 
 .form-control {
   width: 100%; /* Make the form controls full width */
-  padding: 10px;
+ 
   border: 1px solid #ccc;
   border-radius: 5px;
   box-sizing: border-box;
@@ -339,4 +339,12 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
   background-color: #f9f9f9; /* Background color */
   margin-bottom: 10px; /* Add some space between boxes */
  color: rgb(143, 143, 143); 
+}
+.remove-alert {
+  float: right;
+  cursor: pointer;
+}
+
+.remove-alert:hover {
+  color: red; /* Change color on hover if needed */
 }
