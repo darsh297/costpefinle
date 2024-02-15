@@ -1,13 +1,12 @@
 <div class="content">
   <div style="text-align: left; margin-top:60px">
-    <h1>Edit Client</h1>
+    <h1>Edit Project</h1>
   </div>
 
   <div class="profile-details">
-    <%= form_for @project, url: project(@project), method: :patch do |f| %>
+    <%= form_for @project, url: project_path(@project), method: :patch do |f| %>
       <p><strong>Project Name:</strong> <%= f.text_field :name %></p>
-     <p>
-  <p>
+      <p>
   
       <%= f.submit 'Update' %>
     <% end %>
@@ -29,14 +28,13 @@
   <% end %>
 </div>
 
-
 <style>
   .alert-container {
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 20%;
-  z-index: 9999; 
-}
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%;
+    z-index: 9999; 
+  }
 </style>
 <%= render 'layouts/sidebar' %>

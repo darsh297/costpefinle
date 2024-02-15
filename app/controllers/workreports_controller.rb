@@ -8,7 +8,7 @@ end
 
 def allworkreports
   if current_user.role_id == 6
-    redirect_to root_path, alert: "Access denied"
+     redirect_to unauthorized_path, alert: "Access denied"
   elsif current_user.role_id == 1
     @workreports = Workreport.order(date: :desc).all
   elsif current_user.role_id == 2
@@ -49,7 +49,7 @@ end
    @@to_emails = User.where(id: @to).pluck(:email)
    @@cc_emails = User.where(id: @cc).pluck(:email)
  elsif current_user.role_id == 6
-          redirect_to workreports_path,notice: "You are not authorized person to access this page"
+          redirect_to unauthorized_path,alert: "You are not authorized person to access this page"
  else
    set_default_date
  end
@@ -102,5 +102,9 @@ def create
 
   def set_default_date
     @workreport.date = Date.current
+  end
+  def can_edit_workreport?
+    cutoff_time = Time.new(Date.today.year, Date.today.month, Date.today.day + 1, 12, 0, 0, "+00:00") # 12 PM of the next day
+    Time.now < cutoff_time && @workreport.date >= Date.today
   end
 end

@@ -61,12 +61,9 @@
     </tbody>
   </table>
 </div>
-<div style="position: absolute; top: 10px; right: 10px;">
-  <%= link_to workreports_path(user_id: current_user.id), class: "btn-icon-container" do %>
-    <%= image_tag("back.png", alt: "New Work Report", class: "btn-icon", style: "height: 25px; width: 25px;") %>
-    <p class="icon-text" style="margin-left: 10px;"></p>
-  <% end %>
-</div>
+<%= render 'shared/back_button' %>
+
+
 <div class="alert-container">
   <% if notice %>
     <p id="notice-alert" class="alert alert-success">

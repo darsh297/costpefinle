@@ -13,21 +13,18 @@ class User < ApplicationRecord
   has_one_attached :image
   has_one_attached :avatar
 
-
-
-
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contain at least one letter, one digit, and be at least 8 characters long" }, on: :create
   validate :password_no_spaces
+
   validates :designation, presence: true, unless: -> { role_id == 2 }
   validates :department, presence: true, unless: -> { role_id == 2 }
 
-
-def password_no_spaces
-  if password&.include?(' ')
-    errors.add(:password, "can't contain spaces")
+  def password_no_spaces
+    if password&.include?(' ')
+      errors.add(:password, "can't contain spaces")
+    end
   end
-end
-
 
   def active_for_authentication?
     super && isactive?
@@ -46,7 +43,6 @@ end
   def super_admin?
     role_id == 1
   end
-
 
   def unique_super_admin_user
     if User.exists?(role_id: 1)

@@ -34,9 +34,9 @@ Rails.application.routes.draw do
 
 
   post '/create', to: 'users#create'
-  get '/other', to: 'workreports#other', as: :workreports_other
+  # get '/other', to: 'workreports#other', as: :workreports_other
   get '/allworkreports', to: 'workreports#allworkreports'
-
+  get '/unauthorized', to: 'errors#unauthorized'
 
   resources :users, only: [:index, :new, :create, :edit , :show]
 end
