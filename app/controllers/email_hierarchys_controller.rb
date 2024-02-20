@@ -18,7 +18,8 @@ class EmailHierarchysController < ApplicationController
   end
 
   def new
-    @users = User.where(company_id: current_user.company_id)
+    users_with_hierarchy = EmailHierarchy.pluck(:user_id).uniq
+    @users = User.where(company_id: current_user.company_id).where.not(id: users_with_hierarchy)
     @email_hierarchy = EmailHierarchy.new
   end
 

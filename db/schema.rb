@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_02_14_035631) do
+ActiveRecord::Schema[7.1].define(version: 2024_02_16_032943) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -45,6 +45,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_035631) do
   create_table "attendances", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "check_ins", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "check_in_time"
+    t.datetime "check_out_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_check_ins_on_user_id"
   end
 
   create_table "clients", force: :cascade do |t|
@@ -163,6 +172,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_02_14_035631) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "check_ins", "users"
   add_foreign_key "clients", "users"
   add_foreign_key "email_hierarchies", "users"
   add_foreign_key "holidays", "companies"

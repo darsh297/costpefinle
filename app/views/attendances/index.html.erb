@@ -1,6 +1,16 @@
 <div class="content">
   <div style="text-align: left; margin-top:60px">
     <h1>Attendance Report</h1>
+    <div>
+     
+      <ul>
+        <li><span style="color: green;">&#11044;</span> Present  
+         <li> <span style="color: red;">&#11044;</span> Absent </li>
+     
+        <li><span style="color: blue;">&#11044;</span> Holiday</li>
+        <li><span style="color: yellow;">&#11044;</span> Half Day</li>
+      </ul>
+    </div>
     <table class="table table-bordered table-striped">
       <thead class="thead-dark">
         <tr>
@@ -27,9 +37,9 @@
         <% end %>
       </tbody>
     </table>
+    
   </div>  
-
 </div>
-  <%= link_to 'Back', 'javascript:history.back()' %>
+
 
 <%= render 'layouts/sidebar' %>

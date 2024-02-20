@@ -18,7 +18,7 @@ class AttendancesController < ApplicationController
         # Determine the status based on the hours recorded in the work report
         hour_sum = Array(workreports_by_date[date]).sum(&:hours)
         if hour_sum >= 4 && hour_sum <= 7
-          { date: date, status: "Yellow Dot" }
+          { date: date, status: "Half Day" }
         elsif hour_sum < 4
           { date: date, status: "Absent" }
         else

@@ -50,6 +50,7 @@
           <% # Fetch the corresponding user IDs from email hierarchies to_ids and cc_ids fields %>
           <% corresponding_user_ids = EmailHierarchy.where("to_ids LIKE ? OR cc_ids LIKE ?", "%#{current_user.id}%", "%#{current_user.id}%").pluck(:user_id) %>
           <% # Filter users based on the corresponding user IDs and current user's company_id %>
+   
           <% users_for_other_reports = @users.where(id: corresponding_user_ids, company_id: current_user.company_id) %>
           <%= f.collection_select :user_id, users_for_other_reports, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
         <% end %>
@@ -74,7 +75,7 @@
  
       <div class="field">
         <%= f.label :tasks, "Tasks", class: "form-label" %><br />
-        <%= f.text_area :tasks, placeholder: "Task", class: "form-control", required: true %>
+        <%= f.text_area :tasks, placeholder: "Task", class: "form-control" %>
       </div>
  
       <div class="field">
@@ -101,42 +102,9 @@
     <% end %>
   </div>
 </div>
-<%= render 'shared/back_button' %>
+<%= render 'shared/error' %>
 
-<div class="alert-container">
-  <% if notice %>
-    <p id="notice-alert" class="alert alert-success">
-      <%= notice %>
-      <span class="remove-alert" onclick="removeAlert('notice-alert')">&times;</span>
-    </p>
-  <% end %>
-  <% if alert %>
-    <p id="alert-alert" class="alert alert-danger">
-      <%= alert %>
-      <span class="remove-alert" onclick="removeAlert('alert-alert')">&times;</span>
-    </p>
-  <% end %>
-</div>
- 
- 
-<style>
-  .alert-container {
-  position: absolute;
-  top: 20;
-  right: 0;
-  width: 30%;
-  z-index: 9999;
-}
-</style>
-<script>
-  function removeAlert(alertId) {
-    var alertElement = document.getElementById(alertId);
-    if (alertElement) {
-      alertElement.style.display = "none";
-    }
-  }
-</script>
- 
+<%= render 'shared/back_button' %>
 <%= render 'layouts/sidebar' %>
  
  

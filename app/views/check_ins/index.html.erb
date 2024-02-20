@@ -1,0 +1,60 @@
+<div class="content">
+  <div style="text-align: left; margin-top: 60px;">
+    <div class="header-container">
+      <h2>Check-Ins History</h2>
+      <% if @check_in %>
+      <div class="button-container">
+        <div class="field" style="display: inline-block;">
+          <%= form_with(model: @check_in, url: check_ins_path, method: :post) do |form| %>
+          <%= form.submit "Check In", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+          <% end %>
+        </div>
+        <div class="field" style="display: inline-block;">
+          <%= form_with(model: @check_in, url: checkout_check_ins_path, method: :post) do |form| %>
+          <%= form.submit "Check Out", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+          <% end %>
+        </div>
+      </div>
+      <% else %>
+      <p>No check-in records found.</p>
+      <% end %>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead class="thead-dark">
+        <tr>
+          <th>Date</th>
+          <th>Check-in Time</th>
+          <th>Check-out Time</th>
+          <th>Total Work</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @check_ins.each do |check_in| %>
+        <tr>
+          <td><%= check_in.check_in_time.strftime("%d-%m-%Y") %></td>
+          <td><%= check_in.check_in_time.strftime("%I:%M:%S %p") %></td>
+          <td><%= check_in.check_out_time ? check_in.check_out_time.strftime("%I:%M:%S %p") : "Not checked out" %></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+  
+  <div class="alert-container">
+  <% if notice %>
+    <p id="notice-alert" class="alert alert-success custom-alert">
+      <%= notice %>
+      <span class="remove-alert" onclick="removeAlert('notice-alert')">&times;</span>
+    </p>
+  <% end %>
+  <% if alert %>
+    <p id="alert-alert" class="alert alert-danger custom-alert">
+      <%= alert %>
+      <span class="remove-alert" onclick="removeAlert('alert-alert')">&times;</span>
+    </p>
+  <% end %>
+</div>
+
+<%= render 'layouts/sidebar' %>
+

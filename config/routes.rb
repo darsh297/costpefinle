@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   resources :email_hierarchys
   resources :holidays
   resources :attendances
+  resources :check_ins
 
   resources :users do
     member do
@@ -27,6 +28,14 @@ Rails.application.routes.draw do
       delete :soft_delete
     end
   end
+
+resources :check_ins do
+  post 'checkout', on: :collection
+end
+
+resources :check_ins do
+  post :checkout, on: :collection
+end
 
 
 

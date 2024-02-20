@@ -1,8 +1,8 @@
 <div class="content">
   <div style="text-align: left; margin-top:60px">
-    <h1>User Profile</h1>
+    <h1>WorkReport Details </h1>
 
-  <div class="profile-details">
+ 
 
 
     <p><strong>Date:</strong> <%= @workreports.date %></p>
@@ -16,15 +16,16 @@
 </div>
 
 </div>
-<div class="alert-container">
+  
+  <div class="alert-container">
   <% if notice %>
-    <p id="notice-alert" class="alert alert-success">
+    <p id="notice-alert" class="alert alert-success custom-alert">
       <%= notice %>
       <span class="remove-alert" onclick="removeAlert('notice-alert')">&times;</span>
     </p>
   <% end %>
   <% if alert %>
-    <p id="alert-alert" class="alert alert-danger">
+    <p id="alert-alert" class="alert alert-danger custom-alert">
       <%= alert %>
       <span class="remove-alert" onclick="removeAlert('alert-alert')">&times;</span>
     </p>
@@ -41,4 +42,7 @@
   z-index: 9999; 
 }
 </style>
+<%= render 'shared/error' %>
+<%= render 'shared/back_button' %>
 <%= render 'layouts/sidebar' %>
+

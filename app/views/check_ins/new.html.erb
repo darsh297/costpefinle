@@ -1,0 +1,92 @@
+<div class="content">
+  <div style="text-align: left; margin-top:60px">
+    <h1>CheckIn CheckOut</h1>
+
+    <% if @check_in %>
+      <% if @check_in.check_out_time.present? %>
+        <p>You have checked out today.</p>
+      <% else %>
+        <div class="field">
+          <%= form_with(model: @check_in, url: check_ins_path, method: :post) do |form| %>
+            <%= form.submit "Check In", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+          <% end %>
+        </div>
+        <div class="field">
+          <%= form_with(model: @check_in, url: checkout_check_ins_path, method: :post) do |form| %>
+            <%= form.submit "Check Out", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
+          <% end %>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="field">
+        <%= form_with(model: @check_in, url: check_ins_path, method: :post) do |form| %>
+          <%= form.submit "CheckIn", name: "check_in", class: "btn btn-primary" %>
+          <%= form.submit "Check Out", name: "check_out", class: "btn btn-primary" %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+  
+  <div class="alert-container">
+  <% if notice %>
+    <p id="notice-alert" class="alert alert-success custom-alert">
+      <%= notice %>
+      <span class="remove-alert" onclick="removeAlert('notice-alert')">&times;</span>
+    </p>
+  <% end %>
+  <% if alert %>
+    <p id="alert-alert" class="alert alert-danger custom-alert">
+      <%= alert %>
+      <span class="remove-alert" onclick="removeAlert('alert-alert')">&times;</span>
+    </p>
+  <% end %>
+</div>
+
+
+<style>
+  .alert-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 300px;
+    z-index: 9999; 
+  }
+
+  .custom-alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+  .custom-alert.success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+  }
+
+  .custom-alert.error {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+    color: #721c24;
+  }
+
+  .remove-alert {
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    font-size: 16px;
+  }
+</style>
+
+<script>
+  function removeAlert(alertId) {
+    var alertElement = document.getElementById(alertId);
+    if (alertElement) {
+      alertElement.style.display = "none";
+    }
+  }
+</script>
+
+<%= render 'layouts/sidebar' %>

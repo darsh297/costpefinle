@@ -12,6 +12,7 @@ class User < ApplicationRecord
   has_many :clients
   has_one_attached :image
   has_one_attached :avatar
+  has_many :check_ins
 
   validates :email, presence: true, format: { with: URI::MailTo::EMAIL_REGEXP }
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contain at least one letter, one digit, and be at least 8 characters long" }, on: :create

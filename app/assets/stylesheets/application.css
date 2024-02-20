@@ -27,64 +27,67 @@
   .content h1 {
     margin-top: 50;
   }
+/* profile_edit.css */
 
-  .profile-details {
-    padding: 20px;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-  }
-  
-  .profile-details h2 {
-    color: #333;
-    font-size: 24px;
-    margin-bottom: 20px;
-    border-bottom: 2px solid #eee; /* Add a border bottom for separation */
-    padding-bottom: 10px;
-  }
-  
-  .profile-details p {
-    color: #666;
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  
-  .profile-details .info {
-    margin-bottom: 20px;
-  }
-  
-  .profile-details .info label {
-    display: block;
-    color: #555;
-    font-weight: bold;
-    margin-bottom: 5px;
-  }
-  
-  .profile-details .info span {
-    color: #333;
-    font-weight: bold;
-  }
-  
-  .profile-details .actions {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .profile-details .btn {
-    padding: 12px 24px;
-    border: none;
-    border-radius: 5px;
-    background-color: #007bff;
-    color: #fff;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    font-size: 16px;
-  }
-  
-  .profile-details .btn:hover {
-    background-color: #0056b3; /* Darken the background color on hover */
-  }
-  
+/* General styling */
+.profile-details {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #fff;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.profile-details h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.profile-details p {
+  color: #666;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+/* Information display */
+.profile-details .info {
+  margin-bottom: 20px;
+}
+
+.profile-details .info label {
+  display: block;
+  color: #555;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.profile-details .info span {
+  color: #333;
+  font-weight: bold;
+}
+
+/* Action buttons */
+.profile-details .actions {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.profile-details .btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  background-color: #007bff;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-size: 16px;
+}
+
+.profile-details .btn:hover {
+  background-color: #0056b3;
+}
 
   .sidebar a {
     color: white;
@@ -348,3 +351,80 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
 .remove-alert:hover {
   color: red; /* Change color on hover if needed */
 }
+
+
+
+
+.alert-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 400px;
+    z-index: 9999; 
+  }
+
+  .custom-alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+
+
+
+  .remove-alert {
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  .alert-container {
+  position: absolute;
+  top: 20;
+  right: 0;
+  width: 30%;
+  z-index: 9999; 
+  }
+  .button-container {
+  text-align: center;
+}
+
+.field {
+  margin: 5px;
+
+
+}
+.header-container {
+  display: flex;
+  align-items: center;
+}
+ .alert-container {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 310px;
+    z-index: 9999; 
+  }
+
+  .custom-alert {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+
+
+ 
+
+  .remove-alert {
+    cursor: pointer;
+    float: right;
+    margin-left: 10px;
+    font-size: 16px;
+  }
+
+   .round-avatar {
+    border-radius: 50%; /* Makes the image round */
+    width: 100px; /* Adjust the size of the image */
+    height: 100px; /* Adjust the size of the image */
+    object-fit: cover; /* Ensure the image covers the entire container */
+  }

@@ -33,6 +33,13 @@
       <br/>
 
 
+      <%= link_to check_ins_path do %>
+        <%= image_tag("login/check.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
+        CheckIn
+      <% end %>
+      <br/>
+
+
 
       <%= link_to user_path(current_user) do %>
         <%= image_tag("login/user.png", alt: "Dashboard", style: "vertical-align: middle; margin-right: 5px; height: 20px; width: 20px;") %>
