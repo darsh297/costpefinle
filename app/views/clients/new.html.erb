@@ -1,6 +1,7 @@
 <div class="content">
   <div style="text-align: left; margin-top: 60px;">
-    <%= form_for(@client, url: clients_path, data: { turbo: false }) do |f| %>
+    <%= form_for(@client, html: { class: "report-form" }, url: clients_path, data: { turbo: false }) do |f| %>
+       
       <div class="field">
         <h1 style="color: #365486;">New Client</h1>
 
@@ -8,7 +9,7 @@
         <%= f.label :name, class: "form-label" %><span class="required">*</span><br />
         <%= f.text_field :client_name, class: "form-control",placeholder: "Client Name ", required: true %>
       
-
+     
        <%= f.label :company_id, class: "form-label" %><span class="required">*</span><br />
        <%= f.collection_select :company_id, Company.all, :id, :company_name, { prompt: "Select a company" }, class: "form-control", required: true %><br>
 

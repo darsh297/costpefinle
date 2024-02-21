@@ -3,6 +3,7 @@ class AttendancesController < ApplicationController
     @workreports = current_user.workreports
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
 
+    @attendance_data = Attendance.all.group_by { |attendance| attendance.date.strftime("%W") }
     # Fetch holiday dates from the Holidays table
     holidays = Holiday.pluck(:holiday_date)
 

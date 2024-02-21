@@ -18,10 +18,7 @@
         <% end %>
       <% end %>
 
-      <div class="field">
-        <%= f.label :project_id, "Project", class: "form-label" %><br />
-        <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client.client_name} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
-      </div>
+     
 
       <div class="field">
         <%= f.label :tasks, "Tasks", class: "form-label" %><br />

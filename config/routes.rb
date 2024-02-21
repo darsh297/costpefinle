@@ -46,6 +46,7 @@ end
   # get '/other', to: 'workreports#other', as: :workreports_other
   get '/allworkreports', to: 'workreports#allworkreports'
   get '/unauthorized', to: 'errors#unauthorized'
+  get '/workreports/new', to: 'workreports#new_with_user_id', as: 'new_workreport_with_user_id'
 
   resources :users, only: [:index, :new, :create, :edit , :show]
 end

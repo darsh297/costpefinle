@@ -1,11 +1,12 @@
 <div class="content">
-  <div style="text-align: left; margin-top:60px">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 60px;">
     <h1>User Profile</h1>
     <%= link_to edit_user_path(@user), class: 'btn-delete' do %>
       <%= image_tag('action/edit.png', height: 30) %>
       <span class="tooltip-text">Edit</span>
     <% end %>
   </div>
+
 
   <div class="profile-details">
     <div style="float: right;">
@@ -30,3 +31,4 @@
 </div>
 <%= render 'shared/error' %>
 <%= render 'layouts/sidebar' %>
+

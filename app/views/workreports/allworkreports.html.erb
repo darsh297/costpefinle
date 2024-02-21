@@ -1,39 +1,37 @@
 <div class="content">
   <div style="margin-top: 60px; display: flex; align-items: center;">
     <h1 style="flex-grow: 1;">Work Report</h1>
-    <div class="icon-link" style="display: flex; align-items: baseline;">
-    <div class="form-group" style="height: 40px; margin-right: 20px;">
-      <input type="text" id="searchInput" placeholder="Search by Name" class="form-control" style="height: 100%;">
-    </div>
-    <!-- Filter by Year -->
-    <div class="form-group" style="height: 50px; margin-right: 20px;">
-      <select id="filterYear" class="form-control">
-        <option value="">Select Year</option>
-        <!-- Populate options dynamically with years -->
-        <% (2020..Time.now.year).to_a.reverse.each do |year| %>
-          <option value="<%= year %>"><%= year %></option>
-        <% end %>
-      </select>
-    </div>
-    <!-- Filter by Month -->
-    <div class="form-group" style="height: 50px; margin-right: 20px;">
-      <select id="filterMonth" class="form-control">
-        <option value="">Select Month</option>
-        <!-- Populate options dynamically with months -->
-        <% Date::MONTHNAMES.compact.each_with_index do |month, index| %>
-          <option value="<%= index + 1 %>"><%= month %></option>
-        <% end %>
-      </select>
-    </div>
-    <!-- Filter by Date -->
-    <div class="form-group" style="height: 50px; margin-right: 20px;">
-      <input type="date" id="filterDate" class="form-control">
-    </div>
-
-
+    <div class="icon-link" style="display: flex; align-items: center;">
+      <div class="form-group" style="margin-right: 20px;">
+        <input type="text" id="searchInput" placeholder="Search by Name" class="form-control">
+      </div>
+      <!-- Filter by Year -->
+      <div class="form-group" style="margin-right: 20px;">
+        <select id="filterYear" class="form-control">
+          <option value="">Select Year</option>
+          <!-- Populate options dynamically with years -->
+          <% (2020..Time.now.year).to_a.reverse.each do |year| %>
+            <option value="<%= year %>"><%= year %></option>
+          <% end %>
+        </select>
+      </div>
+      <!-- Filter by Month -->
+      <div class="form-group" style="margin-right: 20px;">
+        <select id="filterMonth" class="form-control">
+          <option value="">Select Month</option>
+          <!-- Populate options dynamically with months -->
+          <% Date::MONTHNAMES.compact.each_with_index do |month, index| %>
+            <option value="<%= index + 1 %>"><%= month %></option>
+          <% end %>
+        </select>
+      </div>
+      <!-- Filter by Date -->
+      <div class="form-group" style="margin-right: 20px;">
+        <input type="date" id="filterDate" class="form-control">
+      </div>
       <%= link_to new_workreport_path, class: "float-end" do %>
         <%= image_tag("action/add.png", alt: "New Work Report", class: "btn-icon", style: "height: 25px; width: 25px; margin-left: 10px;") %>
-        <p class="icon-text" style="margin-left: 10px;">Add Other WorkReport</p>
+        <p class="icon-text">Add Other WorkReport</p>
       <% end %>
     </div>
   </div>
@@ -75,7 +73,6 @@
 </div>
 <%= render 'shared/back_button' %>
 <%= render 'shared/error' %>
-
 <%= render 'layouts/sidebar' %>
 
 <script>

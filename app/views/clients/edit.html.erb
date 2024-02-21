@@ -1,10 +1,11 @@
 <div class="content">
-  <div style="text-align: left; margin-top:60px">
-    <h1>Edit Client</h1>
-  </div>
+  <div style="text-align: left; margin-top: 60px;">
+    <%= form_for(@client, html: { class: "report-form" }, url: client_path(@client), method: :patch) do |f| %>
+       
+      <div class="field">
+        <h1 style="color: #365486;">Edit Client</h1>
 
-  <div class="profile-details">
-    <%= form_for @client, url: client_path(@client), method: :patch do |f| %>
+
       <p><strong>Client Name:</strong> <%= f.text_field :client_name %></p>
     <p>
   <p>
@@ -33,7 +34,7 @@
     </p>
   <% end %>
 </div>
-
+</div>
 
 <style>
   .alert-container {

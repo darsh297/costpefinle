@@ -21,11 +21,11 @@ class Ability
       cannot :create, User, role_id: [1, 2,3,4]
 
     elsif user.role_id == 5 || user.role_id == 6
-      can :manage , Workreport
+      # can :manage , Workreport
       can :show , Holiday
       cannot :update , Holiday
       can :show, User, id: user.id
-
+      can :create, Workreport, user_id: user.id
       can :update, User, id: user.id
   end
 end

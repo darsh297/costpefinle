@@ -1,6 +1,7 @@
 <div class="content">
   <div style="text-align: left; margin-top: 60px;">
-    <%= form_for(@holiday, url: holidays_path, data: { turbo: false }) do |f| %>
+    <%= form_for(@holiday,html: { class: "report-form" }, url: holidays_path, data: { turbo: false }) do |f| %>
+     
       <div class="field">
         <h1 style="color: #365486;">New Holiday</h1>
         <%= f.label :holiday_name, "Holiday Name", class: "form-label" %><br>
@@ -16,16 +17,14 @@
           </div>
 
 
-      </div>
+
       <div class="field">
       <%= f.submit "Add", class: "btn btn-primary", style: "width: 100px; background-color: #365486; border-color: #365486;" %>
-    </div>
   <% end %>
+    </div>
+      </div>
 
 
-
-</div>
-</div>
 </div>
       <div class="icon-link">
 
