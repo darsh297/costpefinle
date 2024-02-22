@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
 
   def index
-  if current_user.role_id == 1
+  if current_user.role.role_name == "Root"
     @projects = Project.all
   else
     @projects = current_user.company.projects

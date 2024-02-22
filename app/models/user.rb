@@ -18,8 +18,8 @@ class User < ApplicationRecord
   validates :password, format: { with: /\A(?=.*[a-zA-Z])(?=.*[0-9]).{8,}\z/, message: "must contain at least one letter, one digit, and be at least 8 characters long" }, on: :create
   validate :password_no_spaces
 
-  validates :designation, presence: true, unless: -> { role_id == 2 }
-  validates :department, presence: true, unless: -> { role_id == 2 }
+  validates :designation, presence: true, unless: -> { role.role_name == "Company Admin" }
+  validates :department, presence: true, unless: -> { role.role_name == "Company Admin" }
 
   def password_no_spaces
     if password&.include?(' ')
@@ -42,12 +42,12 @@ class User < ApplicationRecord
   private
 
   def super_admin?
-    role_id == 1
+    role.role_name == "Root"
   end
 
   def unique_super_admin_user
     if User.exists?(role_id: 1)
-      errors.add(:role_id, "Only one user is allowed with role_id == 1")
+      errors.add(:role_id, "Only one user is allowed with role.role_name == Root")
     end
   end
 end

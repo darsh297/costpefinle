@@ -4,7 +4,7 @@ class EmailHierarchysController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
   def index
-    if current_user.role_id == 1
+    if current_user.role.role_name == "Root"
     @email_hierarchys = EmailHierarchy.all
 
     else

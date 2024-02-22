@@ -6,21 +6,21 @@ class Ability
   def initialize(user)
     user ||= User.new
 
-    if user.role_id == 1
+    if user.role.role_name == "Root"
       can :manage, :all
-    elsif user.role_id == 2
+    elsif user.role.role_name == "Company Admin"
       can :manage, :all
       cannot :create, User, role_id: [1, 2]
       cannot :create, Workreport, user: { company_id: !user.company_id }
-    elsif user.role_id == 3
+    elsif user.role.role_name == "HR"
       can :manage, :all
       cannot :create, User, role_id: [1, 2,3]
 
-      elsif user.role_id == 4
+      elsif user.role.role_name == "Project Manager"
       can :manage, :all
       cannot :create, User, role_id: [1, 2,3,4]
 
-    elsif user.role_id == 5 || user.role_id == 6
+    elsif user.role.role_name == "Project Leader" || user.role.role_name == "Employee"
       # can :manage , Workreport
       can :show , Holiday
       cannot :update , Holiday

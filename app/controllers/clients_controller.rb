@@ -1,6 +1,6 @@
 class ClientsController < ApplicationController
 def index
-  if current_user.role_id == 2
+  if current_user.role.role_name == "Company Admin"
     client_ids = current_user.clients.pluck(:id)
     @clients = Client.where(id: client_ids)
   else

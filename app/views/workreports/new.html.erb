@@ -39,7 +39,7 @@
       <% unless params[:user_id].present? %>
         <div class="field">
           <%= f.label :user_id, "User", class: "form-label" %><br />
-          <% if current_user.role_id == 1 %>
+          <% if current_user.role.role_name == "Root" %>
             <%= f.collection_select :user_id, @users, :id, :email, { prompt: "Select a User" }, { class: "form-control custom-select", required: true } %>
           <% else %>
             <% corresponding_user_ids = EmailHierarchy.where("to_ids LIKE ? OR cc_ids LIKE ?", "%#{current_user.id}%", "%#{current_user.id}%").pluck(:user_id) %>
@@ -51,15 +51,15 @@
         <%= f.hidden_field :user_id, value: params[:user_id] %>
       <% end %>
  
-      <% if current_user.role_id == 1 %>
+      <% if current_user.role.role_name == "Root" %>
         <div class="field">
-          <%= f.label :project_id, "Project:", class: "form-label" %><br />
-          <%= f.collection_select :project_id, Project.all, :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+          <%= f.label :projects_id, "Project:", class: "form-label" %><br />
+          <%= f.collection_select :projects_id, Project.all, :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
         </div>
       <% else %>
         <div class="field">
-          <%= f.label :project_id, "Project:", class: "form-label" %><br />
-          <%= f.collection_select :project_id, Project.joins(:client).where(clients: { company_id: current_user.company_id }), :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
+          <%= f.label :projects_id, "Project:", class: "form-label" %><br />
+          <%= f.collection_select :projects_id, Project.joins(:client).where(clients: { company_id: current_user.company_id }), :id, lambda { |project| "#{project.client&.client_name || 'No Client'} - #{project.name}" }, { prompt: "Select a Project" }, { class: "form-control select-with-arrow", required: true } %>
         </div>
       <% end %>
  
@@ -86,14 +86,14 @@
         <%= f.select :status, options_for_select(['inprogress', 'complete'], selected: "complete"), { prompt: "Select Status" }, { class: "form-control", required: true } %>
       </div>
       <br>
-     <div class="field d-flex justify-content-between">
+   
+  <div class="field d-flex justify-content-between">
   <%= f.submit "Add More", class: "btn btn-primary", style: "background-color: #365486; border-color: #365486;", id: "addMoreBtn" %>
   <%= f.submit "Create Work Report", class: "btn btn-primary", style: "background-color: #365486; border-color: #365486;" %>
 </div>
 
-
     <% end %>
- </div> 
+ </div>   
    </div>
 
 <script>
@@ -193,3 +193,12 @@ document.addEventListener("DOMContentLoaded", function() {
 
 <%= render 'shared/back_button' %>
 <%= render 'layouts/sidebar' %>
+
+
+
+
+
+
+
+
+

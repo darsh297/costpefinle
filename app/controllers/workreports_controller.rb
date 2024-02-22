@@ -7,11 +7,11 @@ end
 
 
 def allworkreports
-  if current_user.role_id == 6
+  if current_user.role.role_name == "Employee"
      redirect_to unauthorized_path, alert: "Access denied"
-  elsif current_user.role_id == 1
+  elsif current_user.role.role_name == "Root"
     @workreports = Workreport.order(date: :desc).all
-  elsif current_user.role_id == 2
+  elsif current_user.role.role_name == "Company Admin"
     user_ids_in_same_company = User.where(company_id: current_user.company_id).pluck(:id)
     @workreports = Workreport.where(user_id: user_ids_in_same_company).order(date: :desc)
   else
@@ -24,7 +24,7 @@ end
 
 
 def show
-   @workreports = Workreport.find(params[:id])
+   @workreport = Workreport.find(params[:id])
 end
 
   def other
@@ -43,7 +43,7 @@ end
  if params[:user_id].present?
    @workreport.user_id = params[:user_id]
    @workreport.date = Date.current
- elsif current_user.role_id == 6
+ elsif current_user.role.role_name == "Employee"
           redirect_to unauthorized_path,alert: "You are not authorized person to access this page"
  else
    set_default_date
@@ -70,8 +70,12 @@ end
 
 
 
-   if current_user.role_id == 6
-  if Time.now.hour >= 12 || @workreport.date < Date.today - 1
+   if current_user.role.role_name == "Employee"
+    if @workreport.date == Date.today
+       @workreport = WorkReport.find(params[:id])
+
+
+    elsif Time.now.hour >= 12 || @workreport.date < Date.today - 1
     redirect_to @workreport, alert: "You cannot edit this work report after 12 PM or after the next day."
   end
 end
@@ -94,7 +98,7 @@ end
   private
 
   def workreport_params
-    params.require(:workreport).permit(:user_id, :created_by, :date, :project_id, :tasks, :hours, :minutes, :status)
+    params.require(:workreport).permit(:user_id, :created_by, :date, :projects_id, :tasks, :hours, :minutes, :status)
   end
 
   def set_default_date

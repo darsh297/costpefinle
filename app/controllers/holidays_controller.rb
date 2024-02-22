@@ -1,6 +1,6 @@
 class HolidaysController < ApplicationController
   def index
-    if current_user.role_id == 1
+    if current_user.role.role_name == "Root"
       @holidays = Holiday.all
     else
        @holidays = Holiday.where(company_id: current_user.company_id)
@@ -13,7 +13,7 @@ class HolidaysController < ApplicationController
   end
 
   def edit
-    if current_user.role_id == 6
+    if current_user.role.role_name == "Employee"
       redirect_to holidays_path
     else
     end
@@ -23,18 +23,18 @@ class HolidaysController < ApplicationController
   end
 
   def new
-    if current_user.role_id == 6
+    if current_user.role.role_name == "Employee"
 
     redirect_to root_path, alert: "Access denied"
     else
 
     @holiday=Holiday.new
-    @holiday.created_by = current_user.id if current_user.role_id == 1
+    @holiday.created_by = current_user.id if current_user.role.role_name == "Root"
     end
   end
 
   def create
-    if current_user.role_id == 6
+    if current_user.role.role_name == "Employee"
 
     redirect_to root_path, alert: "Access denied"
     else

@@ -2,7 +2,7 @@
   <div style="text-align: left; margin-top:80px;">
     <h1>All Users</h1>
 
-    <% if current_user.role_id == 1 %> <!-- Only visible to root admin -->
+    <% if current_user.role.role_name == "Root" %> <!-- Only visible to root admin -->
       <table class="table table-bordered table-striped">
         <!-- Your table content -->
       </table>

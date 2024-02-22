@@ -53,7 +53,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-
+  gem 'friendly_id', '~> 5.5.0'
   gem 'pry', '~> 0.14.1'
   gem "letter_opener", group: :development
 

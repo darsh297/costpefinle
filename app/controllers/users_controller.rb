@@ -4,7 +4,7 @@ class UsersController < ApplicationController
         if current_user.role_id.in?([2, 3, 4, 5])
           @filtered_users = User.where(company_id: current_user.company_id, isactive: true, role_id: [2, 3, 4, 5,6])
         else
-          if current_user.role_id == 1
+          if current_user.role.role_name == "Root"
             if params[:company_id].present?
               @filtered_users = User.where(company_id: params[:company_id])
             else
@@ -27,7 +27,7 @@ class UsersController < ApplicationController
         @user = User.new(user_params)
 
         # If the role is 2, set designation_id and department_id to nil
-        if @user.role_id == 2
+        if @user.role.role_name == "Company Admin"
           @user.designation_id = nil
           @user.department_id = nil
         end
@@ -68,7 +68,7 @@ class UsersController < ApplicationController
 def soft_delete
   @user = User.find(params[:id])
 
-  unless @user.role_id == 1
+  unless @user.role.role_name == "Root"
     @user.soft_delete
     redirect_to users_path, notice: 'User was successfully soft deleted.'
   else
