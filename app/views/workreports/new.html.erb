@@ -86,31 +86,108 @@
         <%= f.select :status, options_for_select(['inprogress', 'complete'], selected: "complete"), { prompt: "Select Status" }, { class: "form-control", required: true } %>
       </div>
       <br>
-       <div class="field d-flex justify-content-between">
+     <div class="field d-flex justify-content-between">
   <%= f.submit "Add More", class: "btn btn-primary", style: "background-color: #365486; border-color: #365486;", id: "addMoreBtn" %>
   <%= f.submit "Create Work Report", class: "btn btn-primary", style: "background-color: #365486; border-color: #365486;" %>
 </div>
 
+
     <% end %>
-  </div>
-</div>
+ </div> 
+   </div>
+
 <script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const addMoreBtn = document.getElementById("addMoreBtn");
-    addMoreBtn.addEventListener("click", function(event) {
-      event.preventDefault();
-      const form = document.querySelector('.report-form');
-      const newForm = form.cloneNode(true);
-      // Remove date field from the new form
-      const dateField = newForm.querySelector('[name="workreport[date]"]');
-      if (dateField) {
-        dateField.closest('.field').remove();
+document.addEventListener("DOMContentLoaded", function() {
+  const addMoreBtn = document.getElementById("addMoreBtn");
+  addMoreBtn.addEventListener("click", function(event) {
+    event.preventDefault();
+    const form = document.querySelector('.report-form');
+    const newForm = form.cloneNode(true);
+    
+    // Remove the heading from the new form if it exists
+    const heading = newForm.querySelector('h1');
+    if (heading) {
+      heading.remove();
+    }
+    
+    // Remove date field from the new form if it exists
+    const dateField = newForm.querySelector('[name="workreport[date]"]');
+    if (dateField) {
+      const dateFieldContainer = dateField.closest('.field');
+      if (dateFieldContainer) {
+        dateFieldContainer.remove();
+      } else {
+        dateField.remove(); // Remove the date field directly if its container is not found
       }
-      // Ensure the action attribute is retained
-      newForm.action = form.action;
-      form.parentNode.insertBefore(newForm, form.nextSibling);
-    });
+      
+      // Remove the associated label for the date field
+      const dateLabel = newForm.querySelector('label[for="' + dateField.id + '"]');
+      if (dateLabel) {
+        dateLabel.remove();
+      }
+    }
+
+    // Remove select user field from the new form if it exists
+    const userField = newForm.querySelector('[name="workreport[user_id]"]');
+    if (userField) {
+      const userFieldContainer = userField.closest('.field');
+      if (userFieldContainer) {
+        userFieldContainer.remove();
+      } else {
+        userField.remove(); // Remove the user field directly if its container is not found
+      }
+      
+      // Remove the associated label for the user field
+      const userLabel = newForm.querySelector('label[for="' + userField.id + '"]');
+      if (userLabel) {
+        userLabel.remove();
+      }
+    }
+    
+    // Set the same date in the cloned form
+    const originalDateField = form.querySelector('[name="workreport[date]"]');
+    if (originalDateField) {
+      const newDateField = newForm.querySelector('[name="workreport[date]"]');
+      if (newDateField) {
+        newDateField.value = originalDateField.value;
+      }
+    }
+    
+    // Set the same user ID in the cloned form
+    const originalUserIdField = form.querySelector('[name="workreport[user_id]"]');
+    if (originalUserIdField) {
+      const newUserIdField = newForm.querySelector('[name="workreport[user_id]"]');
+      if (newUserIdField) {
+        newUserIdField.value = originalUserIdField.value;
+      }
+    }
+    
+    // Remove "Add More" and "Create Work Report" buttons from the new form
+    const addMoreButton = newForm.querySelector('#addMoreBtn');
+    if (addMoreButton) {
+      addMoreButton.remove();
+    }
+    const createReportButton = newForm.querySelector('[type="submit"]');
+    if (createReportButton) {
+      createReportButton.remove();
+    }
+    
+    // Create and add a cancel button to the new form
+    const cancelButton = document.createElement('button');
+    cancelButton.textContent = 'Cancel';
+    cancelButton.classList.add('btn', 'btn-secondary');
+    cancelButton.style.backgroundColor = '#707070'; // Set the background color of the button
+    cancelButton.style.border = 'none'; // Remove border
+    cancelButton.onclick = function() {
+      newForm.remove();
+    };
+    newForm.appendChild(cancelButton);
+    
+    // Ensure the action attribute is retained
+    newForm.action = form.action;
+    form.parentNode.insertBefore(newForm, form.nextSibling);
   });
+});
 </script>
 
 

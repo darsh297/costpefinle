@@ -1,5 +1,5 @@
 class Workreport < ApplicationRecord
-  belongs_to :project
+  has_many :projects
   belongs_to :user
 
   validates :user_id, presence: true, unless: :user_with_role_six?

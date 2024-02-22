@@ -438,3 +438,9 @@ body, h1, h2, h3, h4, h5, h6, p, .sidebar, .content, .profile-details, .btn, .fo
   font-size: small; /* Set font size to small */
 }
 
+.button-box {
+  margin-top: 20px; /* Adjust the margin as needed */
+  border: 1px solid #ccc; /* Add a border */
+  padding: 10px; /* Add padding for spacing */
+  border-radius: 5px; /* Add border radius for rounded corners */
+}
